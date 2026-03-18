@@ -6,1038 +6,812 @@
 <title>Maieutic Jersey Form 2026</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --red:#8B1212;--red-l:#b01818;--red-d:#5e0d0d;
-    --teal:#2E8B7A;--teal-l:#3aada0;--teal-d:#1d5c54;
-    --gold:#c9941a;--gold-l:#e8b830;
-    --chalk:#fff;--dark:#0e0707;--card:#180c0c;--border:#3a1a1a;
-    --muted:#9e6a6a;--text:#f0dada;
-    --mrc:#b01818;--mee:#2E8B7A;--mm:#c9941a;
-  }
-  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-  body{background:var(--dark);font-family:'Outfit',sans-serif;color:var(--text);min-height:100vh}
-  body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
-    background:radial-gradient(ellipse 80% 50% at 50% -10%,#8B121218 0%,transparent 60%),
-    radial-gradient(ellipse 40% 30% at 100% 80%,#2E8B7A0a 0%,transparent 50%)}
+:root{
+  --red:#8B1212;--red-l:#b01818;--red-d:#5e0d0d;
+  --teal:#2E8B7A;--teal-l:#3aada0;--teal-d:#1d5c54;
+  --gold:#c9941a;--gold-l:#e8b830;
+  --chalk:#fff;--dark:#0e0707;--card:#180c0c;--border:#3a1a1a;
+  --muted:#9e6a6a;--text:#f0dada;
+  --mrc:#b01818;--mee:#2E8B7A;--mm:#c9941a;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--dark);font-family:'Outfit',sans-serif;color:var(--text);min-height:100vh}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:radial-gradient(ellipse 80% 50% at 50% -10%,#8B121218 0%,transparent 60%),
+  radial-gradient(ellipse 40% 30% at 100% 80%,#2E8B7A0a 0%,transparent 50%)}
 
-  /* NAV */
-  .nav{position:sticky;top:0;z-index:100;background:rgba(14,7,7,0.96);backdrop-filter:blur(12px);
-    border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;
-    padding:0 24px;height:58px}
-  .nav-logo{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:3px;color:var(--chalk)}
-  .nav-logo span{color:var(--red-l)}
-  .nav-badge{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:1.5px;color:var(--muted);
-    border:1px solid var(--border);padding:4px 10px;border-radius:20px;text-transform:uppercase}
+/* NAV */
+.nav{position:sticky;top:0;z-index:100;background:rgba(14,7,7,0.97);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;
+  padding:0 24px;height:58px}
+.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:3px;color:var(--chalk);cursor:pointer}
+.nav-logo span{color:var(--red-l)}
+.nav-tabs{display:flex;gap:4px}
+.nav-tab{padding:7px 16px;border-radius:8px;font-family:'Space Mono',monospace;font-size:10px;
+  letter-spacing:1px;text-transform:uppercase;cursor:pointer;border:1px solid transparent;
+  color:var(--muted);background:transparent;transition:all 0.2s}
+.nav-tab:hover{color:var(--text);border-color:var(--border)}
+.nav-tab.active{background:rgba(139,18,18,0.15);border-color:var(--red-d);color:var(--red-l)}
+.nav-tab.admin-tab.active{background:rgba(46,139,122,0.12);border-color:var(--teal-d);color:var(--teal-l)}
 
-  /* HERO */
-  .hero{text-align:center;padding:48px 20px 32px;position:relative;z-index:1}
-  .hero-tag{display:inline-block;font-family:'Space Mono',monospace;font-size:9px;letter-spacing:2.5px;
-    text-transform:uppercase;color:var(--teal-l);border:1px solid var(--teal-d);padding:5px 14px;
-    border-radius:20px;margin-bottom:16px;background:rgba(46,139,122,0.07)}
-  .hero h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(48px,9vw,80px);line-height:0.9;
-    letter-spacing:2px;color:var(--chalk);margin-bottom:14px}
-  .hero h1 span{color:var(--red-l)}
-  .hero p{color:var(--muted);font-size:14px;font-weight:300;max-width:420px;margin:0 auto;line-height:1.7}
+/* PAGES */
+.page{display:none;position:relative;z-index:1}
+.page.active{display:block}
 
-  /* PROGRESS */
-  .form-wrap{max-width:640px;margin:0 auto;padding:0 20px 100px;position:relative;z-index:1}
-  .prog-wrap{margin-bottom:36px}
-  .prog-steps{display:flex;justify-content:space-between;margin-bottom:8px}
-  .prog-step{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:1px;text-transform:uppercase;
-    color:var(--muted);transition:color 0.3s}
-  .prog-step.done{color:var(--teal-l)}
-  .prog-step.active{color:var(--chalk)}
-  .prog-track{height:3px;background:var(--border);border-radius:2px;overflow:hidden}
-  .prog-fill{height:100%;background:linear-gradient(90deg,var(--red),var(--gold),var(--teal));
-    border-radius:2px;transition:width 0.5s cubic-bezier(.4,0,.2,1);width:0%}
+/* HERO */
+.hero{text-align:center;padding:48px 20px 32px}
+.hero-tag{display:inline-block;font-family:'Space Mono',monospace;font-size:9px;letter-spacing:2.5px;
+  text-transform:uppercase;color:var(--teal-l);border:1px solid var(--teal-d);padding:5px 14px;
+  border-radius:20px;margin-bottom:16px;background:rgba(46,139,122,0.07)}
+.hero h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(48px,9vw,80px);line-height:0.9;
+  letter-spacing:2px;color:var(--chalk);margin-bottom:14px}
+.hero h1 span{color:var(--red-l)}
+.hero p{color:var(--muted);font-size:14px;font-weight:300;max-width:420px;margin:0 auto;line-height:1.7}
 
-  /* SECTIONS */
-  .fsec{display:none;animation:fadeUp 0.35s ease}
-  .fsec.active{display:block}
-  @keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
-  .sec-title{display:flex;align-items:center;gap:12px;margin-bottom:28px}
-  .sec-icon{width:46px;height:46px;background:linear-gradient(135deg,var(--red-d),#3a1010);
-    border:1px solid var(--border);border-radius:12px;display:flex;align-items:center;
-    justify-content:center;font-size:22px;flex-shrink:0}
-  .sec-title-text .name{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:2px;
-    line-height:1;color:var(--chalk)}
-  .sec-title-text .sub{font-size:12px;color:var(--muted);margin-top:2px}
+/* FORM WRAP */
+.form-wrap{max-width:640px;margin:0 auto;padding:0 20px 100px}
 
-  /* FIELDS */
-  .field{margin-bottom:24px}
-  .field label{display:block;font-size:13px;font-weight:600;color:var(--chalk);margin-bottom:8px;
-    font-family:'Space Mono',monospace;letter-spacing:0.5px;text-transform:uppercase}
-  .field label .req{color:var(--teal-l);margin-left:3px}
-  .field input[type="text"],.field input[type="number"]{width:100%;background:var(--card);
-    border:1px solid var(--border);border-radius:10px;padding:13px 16px;
-    font-family:'Outfit',sans-serif;font-size:15px;color:var(--chalk);outline:none;
-    transition:border-color 0.2s,box-shadow 0.2s}
-  .field input:focus{border-color:var(--red);box-shadow:0 0 0 3px rgba(139,18,18,0.15)}
-  .field input::placeholder{color:#5a3030}
+/* PROGRESS */
+.prog-wrap{margin-bottom:36px}
+.prog-steps{display:flex;justify-content:space-between;margin-bottom:8px}
+.prog-step{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:1px;text-transform:uppercase;
+  color:var(--muted);transition:color 0.3s}
+.prog-step.done{color:var(--teal-l)}
+.prog-step.active{color:var(--chalk)}
+.prog-track{height:3px;background:var(--border);border-radius:2px;overflow:hidden}
+.prog-fill{height:100%;background:linear-gradient(90deg,var(--red),var(--gold),var(--teal));
+  border-radius:2px;transition:width 0.5s cubic-bezier(.4,0,.2,1);width:0%}
 
-  /* TEAM CARDS */
-  .team-grid{display:grid;grid-template-columns:1fr;gap:12px}
-  .topt{position:relative}
-  .topt input{position:absolute;opacity:0;width:0;height:0}
-  .topt label{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:14px;
-    background:var(--card);border:2px solid var(--border);border-radius:14px;padding:16px 18px;
-    cursor:pointer;transition:all 0.2s;margin:0}
-  .topt label:hover{border-color:rgba(139,18,18,0.5);background:#1f0f0f}
-  .topt input:checked + label{background:#1f0d0d}
-  .topt[data-team="MRC"] input:checked + label{border-color:var(--mrc);box-shadow:0 0 0 1px var(--mrc), inset 0 0 40px rgba(176,24,24,0.08)}
-  .topt[data-team="MEE"] input:checked + label{border-color:var(--mee);box-shadow:0 0 0 1px var(--mee), inset 0 0 40px rgba(46,139,122,0.08)}
-  .topt[data-team="MM"] input:checked + label{border-color:var(--mm);box-shadow:0 0 0 1px var(--mm), inset 0 0 40px rgba(201,148,26,0.08)}
-  .team-badge{width:52px;height:52px;border-radius:10px;display:flex;align-items:center;
-    justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:1px;flex-shrink:0}
-  .badge-mrc{background:linear-gradient(135deg,#3d0808,#5e0d0d);border:1px solid var(--mrc);color:var(--red-l)}
-  .badge-mee{background:linear-gradient(135deg,#0a2e29,#1d5c54);border:1px solid var(--mee);color:var(--teal-l)}
-  .badge-mm{background:linear-gradient(135deg,#3a2800,#5c3e00);border:1px solid var(--mm);color:var(--gold-l)}
-  .team-info .tname{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:2px;
-    line-height:1;color:var(--chalk)}
-  .team-info .owner{font-size:12px;color:var(--muted);margin-top:3px}
-  .team-info .abbr{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:2px;margin-top:2px}
-  .abbr-mrc{color:var(--red-l)}
-  .abbr-mee{color:var(--teal-l)}
-  .abbr-mm{color:var(--gold-l)}
-  .team-check{width:22px;height:22px;border-radius:50%;border:2px solid var(--border);
-    display:flex;align-items:center;justify-content:center;transition:all 0.2s;flex-shrink:0;font-size:11px}
-  .topt[data-team="MRC"] input:checked + label .team-check{background:var(--mrc);border-color:var(--mrc);color:white}
-  .topt[data-team="MEE"] input:checked + label .team-check{background:var(--mee);border-color:var(--mee);color:white}
-  .topt[data-team="MM"] input:checked + label .team-check{background:var(--mm);border-color:var(--mm);color:white}
+/* SECTIONS */
+.fsec{display:none;animation:fadeUp 0.35s ease}
+.fsec.active{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.sec-title{display:flex;align-items:center;gap:12px;margin-bottom:28px}
+.sec-icon{width:46px;height:46px;background:linear-gradient(135deg,var(--red-d),#3a1010);
+  border:1px solid var(--border);border-radius:12px;display:flex;align-items:center;
+  justify-content:center;font-size:22px;flex-shrink:0}
+.sec-title-text .name{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:2px;line-height:1;color:var(--chalk)}
+.sec-title-text .sub{font-size:12px;color:var(--muted);margin-top:2px}
 
-  /* VISUAL OPTION CARDS (jersey style, size, sleeve) */
-  .vopt-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px}
-  .vopt-grid.two{grid-template-columns:1fr 1fr}
-  .vopt-grid.three{grid-template-columns:repeat(3,1fr)}
-  .vopt{position:relative}
-  .vopt input{position:absolute;opacity:0;width:0;height:0}
-  .vopt label{display:flex;flex-direction:column;align-items:center;gap:10px;
-    background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px 10px;
-    cursor:pointer;transition:all 0.2s;text-align:center;margin:0;min-height:120px;justify-content:center}
-  .vopt label:hover{border-color:rgba(139,18,18,0.5);background:#1f0f0f}
-  .vopt input:checked + label{border-color:var(--red-l);background:#200e0e;box-shadow:0 0 0 1px var(--red-d)}
-  .vopt-img{width:64px;height:64px;object-fit:contain;border-radius:6px;background:#120808;padding:4px}
-  .vopt-svg{width:64px;height:64px}
-  .vopt-title{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:1px;
-    text-transform:uppercase;color:var(--chalk);line-height:1.3}
-  .vopt-sub{font-size:11px;color:var(--muted);margin-top:2px}
-  .vcheck{width:18px;height:18px;border-radius:50%;border:2px solid var(--border);
-    position:absolute;top:9px;right:9px;display:flex;align-items:center;justify-content:center;
-    transition:all 0.2s;font-size:9px}
-  .vopt input:checked + label .vcheck{background:var(--red-l);border-color:var(--red-l);color:white}
+/* FIELDS */
+.field{margin-bottom:24px}
+.field label{display:block;font-size:13px;font-weight:600;color:var(--chalk);margin-bottom:8px;
+  font-family:'Space Mono',monospace;letter-spacing:0.5px;text-transform:uppercase}
+.field label .req{color:var(--teal-l);margin-left:3px}
+.field input[type="text"]{width:100%;background:var(--card);border:1px solid var(--border);
+  border-radius:10px;padding:13px 16px;font-family:'Outfit',sans-serif;font-size:15px;
+  color:var(--chalk);outline:none;transition:border-color 0.2s,box-shadow 0.2s}
+.field input:focus{border-color:var(--red);box-shadow:0 0 0 3px rgba(139,18,18,0.15)}
+.field input::placeholder{color:#5a3030}
+.ferr{font-size:11px;color:#ff7070;margin-top:7px;display:none;font-family:'Space Mono',monospace}
+.field.err input{border-color:#ff5050!important}
+.field.err .ferr{display:block}
+.sec-err{font-size:11px;color:#ff7070;font-family:'Space Mono',monospace;padding:10px 14px;
+  background:#1e0808;border:1px solid #5a1a1a;border-radius:8px;margin-bottom:16px;display:none}
+.sec-err.show{display:block}
 
-  /* RADIO SIMPLE */
-  .radio-group{display:flex;flex-direction:column;gap:8px}
-  .ropt{position:relative}
-  .ropt input{position:absolute;opacity:0;width:0;height:0}
-  .ropt label{display:flex;align-items:center;gap:11px;background:var(--card);
-    border:1px solid var(--border);border-radius:10px;padding:11px 16px;cursor:pointer;
-    transition:all 0.15s;font-size:14px;color:var(--text);margin:0}
-  .ropt label:hover{border-color:var(--red);background:#200e0e}
-  .ropt input:checked + label{border-color:var(--red-l);background:#2a0f0f;color:var(--chalk)}
-  .rdot{width:16px;height:16px;border-radius:50%;border:2px solid var(--border);flex-shrink:0;transition:all 0.15s}
-  .ropt input:checked + label .rdot{border-color:var(--red-l);background:var(--red);box-shadow:0 0 0 3px rgba(139,18,18,0.2)}
+/* TEAM CARDS */
+.team-grid{display:grid;grid-template-columns:1fr;gap:12px}
+.topt{position:relative}
+.topt input{position:absolute;opacity:0;width:0;height:0}
+.topt label{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:14px;
+  background:var(--card);border:2px solid var(--border);border-radius:14px;padding:16px 18px;
+  cursor:pointer;transition:all 0.2s;margin:0}
+.topt label:hover{border-color:rgba(139,18,18,0.5);background:#1f0f0f}
+.topt input:checked+label{background:#1f0d0d}
+.topt[data-team="MRC"] input:checked+label{border-color:var(--mrc);box-shadow:0 0 0 1px var(--mrc),inset 0 0 40px rgba(176,24,24,0.08)}
+.topt[data-team="MEE"] input:checked+label{border-color:var(--mee);box-shadow:0 0 0 1px var(--mee),inset 0 0 40px rgba(46,139,122,0.08)}
+.topt[data-team="MM"] input:checked+label{border-color:var(--mm);box-shadow:0 0 0 1px var(--mm),inset 0 0 40px rgba(201,148,26,0.08)}
+.team-badge{width:52px;height:52px;border-radius:10px;display:flex;align-items:center;
+  justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:1px;flex-shrink:0}
+.badge-mrc{background:linear-gradient(135deg,#3d0808,#5e0d0d);border:1px solid var(--mrc);color:var(--red-l)}
+.badge-mee{background:linear-gradient(135deg,#0a2e29,#1d5c54);border:1px solid var(--mee);color:var(--teal-l)}
+.badge-mm{background:linear-gradient(135deg,#3a2800,#5c3e00);border:1px solid var(--mm);color:var(--gold-l)}
+.team-info .tname{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:2px;line-height:1;color:var(--chalk)}
+.team-info .owner{font-size:12px;color:var(--muted);margin-top:3px}
+.team-info .abbr{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:2px;margin-top:2px}
+.abbr-mrc{color:var(--red-l)}.abbr-mee{color:var(--teal-l)}.abbr-mm{color:var(--gold-l)}
+.team-check{width:22px;height:22px;border-radius:50%;border:2px solid var(--border);
+  display:flex;align-items:center;justify-content:center;transition:all 0.2s;flex-shrink:0;font-size:11px}
+.topt[data-team="MRC"] input:checked+label .team-check{background:var(--mrc);border-color:var(--mrc);color:white}
+.topt[data-team="MEE"] input:checked+label .team-check{background:var(--mee);border-color:var(--mee);color:white}
+.topt[data-team="MM"] input:checked+label .team-check{background:var(--mm);border-color:var(--mm);color:white}
 
-  /* NAV BTNS */
-  .fnav{display:flex;justify-content:space-between;align-items:center;margin-top:36px;gap:12px}
-  .btn{padding:13px 26px;border-radius:10px;font-family:'Space Mono',monospace;font-size:11px;
-    letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;border:none;transition:all 0.2s;font-weight:700}
-  .btn-ghost{background:transparent;border:1px solid var(--border);color:var(--muted)}
-  .btn-ghost:hover{border-color:var(--red-d);color:var(--text)}
-  .btn-next{background:linear-gradient(135deg,var(--red),var(--red-d));color:white;
-    border:1px solid var(--red-l);box-shadow:0 4px 16px rgba(139,18,18,0.3);flex:1;max-width:200px}
-  .btn-next:hover{background:linear-gradient(135deg,var(--red-l),var(--red));transform:translateY(-1px)}
-  .btn-submit{background:linear-gradient(135deg,var(--teal),var(--teal-d));color:white;
-    border:1px solid var(--teal-l);box-shadow:0 4px 16px rgba(46,139,122,0.3);flex:1;max-width:240px}
-  .btn-submit:hover{background:linear-gradient(135deg,var(--teal-l),var(--teal));transform:translateY(-1px)}
-  .btn-submit:disabled{opacity:0.5;cursor:not-allowed;transform:none}
-  .ferr{font-size:11px;color:#ff7070;margin-top:7px;display:none;font-family:'Space Mono',monospace;letter-spacing:0.3px}
-  .field.err input{border-color:#ff5050!important}
-  .field.err .ferr{display:block}
-  .sec-err{font-size:11px;color:#ff7070;font-family:'Space Mono',monospace;padding:10px 14px;
-    background:#1e0808;border:1px solid #5a1a1a;border-radius:8px;margin-bottom:16px;display:none}
-  .sec-err.show{display:block}
+/* VISUAL OPTION CARDS */
+.vopt-grid{display:grid;gap:10px}
+.vopt-grid.five{grid-template-columns:repeat(5,1fr)}
+.vopt-grid.three{grid-template-columns:repeat(3,1fr)}
+.vopt{position:relative}
+.vopt input{position:absolute;opacity:0;width:0;height:0}
+.vopt label{display:flex;flex-direction:column;align-items:center;gap:10px;background:var(--card);
+  border:1px solid var(--border);border-radius:12px;padding:14px 10px;cursor:pointer;
+  transition:all 0.2s;text-align:center;margin:0;min-height:120px;justify-content:center}
+.vopt label:hover{border-color:rgba(139,18,18,0.5);background:#1f0f0f}
+.vopt input:checked+label{border-color:var(--red-l);background:#200e0e;box-shadow:0 0 0 1px var(--red-d)}
+.vopt-svg{width:64px;height:64px}
+.vopt-title{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--chalk)}
+.vopt-sub{font-size:11px;color:var(--muted);margin-top:2px}
+.vcheck{width:18px;height:18px;border-radius:50%;border:2px solid var(--border);
+  position:absolute;top:9px;right:9px;display:flex;align-items:center;justify-content:center;
+  transition:all 0.2s;font-size:9px}
+.vopt input:checked+label .vcheck{background:var(--red-l);border-color:var(--red-l);color:white}
 
-  /* SUMMARY */
-  .summary-grid{display:grid;gap:10px;margin-bottom:8px}
-  .srow{display:flex;justify-content:space-between;align-items:flex-start;
-    background:var(--card);border:1px solid var(--border);border-radius:10px;padding:13px 16px;gap:12px}
-  .srow .slabel{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:1px;
-    text-transform:uppercase;color:var(--muted);flex-shrink:0}
-  .srow .sval{font-size:14px;color:var(--chalk);text-align:right;font-weight:600}
-  .srow.highlight{border-color:var(--teal-d);background:#0d1e1b}
-  .srow.highlight .slabel{color:var(--teal-l)}
-  .srow.highlight .sval{color:var(--teal-l)}
+/* BTNS */
+.fnav{display:flex;justify-content:space-between;align-items:center;margin-top:36px;gap:12px}
+.btn{padding:13px 26px;border-radius:10px;font-family:'Space Mono',monospace;font-size:11px;
+  letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;border:none;transition:all 0.2s;font-weight:700}
+.btn-ghost{background:transparent;border:1px solid var(--border);color:var(--muted)}
+.btn-ghost:hover{border-color:var(--red-d);color:var(--text)}
+.btn-next{background:linear-gradient(135deg,var(--red),var(--red-d));color:white;
+  border:1px solid var(--red-l);box-shadow:0 4px 16px rgba(139,18,18,0.3);flex:1;max-width:200px}
+.btn-next:hover{background:linear-gradient(135deg,var(--red-l),var(--red));transform:translateY(-1px)}
+.btn-submit{background:linear-gradient(135deg,var(--teal),var(--teal-d));color:white;
+  border:1px solid var(--teal-l);box-shadow:0 4px 16px rgba(46,139,122,0.3);flex:1;max-width:240px}
+.btn-submit:hover{background:linear-gradient(135deg,var(--teal-l),var(--teal));transform:translateY(-1px)}
+.btn-submit:disabled{opacity:0.5;cursor:not-allowed;transform:none}
 
-  /* SUCCESS */
-  .success-screen{display:none;text-align:center;padding:70px 20px;animation:fadeUp 0.5s ease;position:relative;z-index:1}
-  .success-screen.active{display:block}
-  .suc-icon{width:84px;height:84px;background:linear-gradient(135deg,var(--teal-d),#0e3a34);
-    border:2px solid var(--teal);border-radius:50%;display:flex;align-items:center;justify-content:center;
-    font-size:38px;margin:0 auto 24px;box-shadow:0 0 40px rgba(46,139,122,0.3)}
-  .success-screen h2{font-family:'Bebas Neue',sans-serif;font-size:54px;letter-spacing:2px;color:var(--teal-l);margin-bottom:8px}
-  .success-screen p{color:var(--muted);font-size:14px;margin-bottom:28px;line-height:1.7}
-  .suc-detail{display:inline-block;background:var(--card);border:1px solid var(--border);
-    border-radius:10px;padding:12px 24px;font-family:'Space Mono',monospace;font-size:11px;
-    letter-spacing:1px;color:var(--teal-l);margin-bottom:28px}
-  .btn-new{background:linear-gradient(135deg,var(--red),var(--red-d));color:white;
-    border:1px solid var(--red-l);padding:13px 28px;border-radius:10px;cursor:pointer;
-    font-family:'Space Mono',monospace;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;
-    box-shadow:0 4px 16px rgba(139,18,18,0.3);transition:all 0.2s;border-style:solid}
-  .btn-new:hover{transform:translateY(-1px)}
+/* SUMMARY */
+.summary-grid{display:grid;gap:10px;margin-bottom:8px}
+.srow{display:flex;justify-content:space-between;align-items:flex-start;
+  background:var(--card);border:1px solid var(--border);border-radius:10px;padding:13px 16px;gap:12px}
+.srow .slabel{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);flex-shrink:0}
+.srow .sval{font-size:14px;color:var(--chalk);text-align:right;font-weight:600}
+.srow.highlight{border-color:var(--teal-d);background:#0d1e1b}
+.srow.highlight .slabel{color:var(--teal-l)}
+.srow.highlight .sval{color:var(--teal-l)}
 
-  /* TOAST */
-  .toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(80px);
-    background:#1a2e28;border:1px solid var(--teal);color:var(--teal-l);padding:12px 24px;
-    border-radius:10px;font-size:13px;font-family:'Space Mono',monospace;letter-spacing:0.5px;
-    z-index:999;transition:transform 0.3s ease;white-space:nowrap;max-width:90vw;text-align:center}
-  .toast.show{transform:translateX(-50%) translateY(0)}
-  .toast.err-toast{background:#2e1a1a;border-color:var(--red);color:#ff9090}
+/* NUMBER SELECTOR */
+.num-selector{display:flex;align-items:center}
+.num-btn{width:44px;height:46px;background:var(--card);border:1px solid var(--border);
+  color:var(--chalk);font-size:20px;cursor:pointer;transition:all 0.15s;display:flex;
+  align-items:center;justify-content:center;user-select:none}
+.num-btn:first-child{border-radius:10px 0 0 10px;border-right:none}
+.num-btn:last-child{border-radius:0 10px 10px 0;border-left:none}
+.num-btn:hover{background:#2a0f0f;color:var(--red-l)}
+.num-display{flex:1;height:46px;background:var(--card);border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;
+  font-size:28px;letter-spacing:2px;color:var(--chalk);min-width:80px}
+.divider{height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent);margin:28px 0}
 
-  /* SETUP MODAL */
-  .modal-overlay{position:fixed;inset:0;background:rgba(14,7,7,0.93);backdrop-filter:blur(8px);
-    z-index:300;display:flex;align-items:center;justify-content:center;padding:20px}
-  .modal-overlay.hidden{display:none}
-  .modal-box{background:#1c0e0e;border:1px solid #4a2020;border-top:4px solid var(--teal);
-    border-radius:16px;padding:36px 32px;width:100%;max-width:460px;max-height:90vh;overflow-y:auto}
-  .modal-title{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:2px;color:var(--chalk);margin-bottom:6px}
-  .modal-sub{font-size:13px;color:var(--muted);margin-bottom:22px;line-height:1.6}
-  .modal-field{margin-bottom:16px}
-  .modal-field label{display:block;font-size:11px;font-weight:600;color:var(--chalk);margin-bottom:7px;
-    font-family:'Space Mono',monospace;letter-spacing:0.5px;text-transform:uppercase}
-  .modal-field input{width:100%;background:var(--card);border:1px solid var(--border);
-    border-radius:10px;padding:12px 16px;font-family:'Outfit',sans-serif;font-size:15px;
-    color:var(--chalk);outline:none;transition:border-color 0.2s,box-shadow 0.2s}
-  .modal-field input:focus{border-color:var(--teal);box-shadow:0 0 0 3px rgba(46,139,122,0.15)}
-  .modal-field input::placeholder{color:#5a3030}
-  .setup-note{background:#0a1a18;border:1px solid #1d5c54;border-radius:8px;padding:14px;
-    font-size:11px;color:#6a9e9a;font-family:'Space Mono',monospace;line-height:1.9;margin-bottom:18px}
-  .setup-note strong{color:var(--chalk)}
-  .setup-note a{color:var(--teal-l);text-decoration:none}
-  .step-li{display:flex;gap:10px;align-items:flex-start;margin-bottom:6px}
-  .step-num{background:var(--teal-d);color:var(--teal-l);border-radius:50%;width:20px;height:20px;
-    display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0;margin-top:1px}
-  .copy-row{display:flex;align-items:center;gap:8px;margin-top:10px}
-  .copy-row input{flex:1;background:#0a0a08;border:1px solid #1d5c54;border-radius:8px;
-    padding:8px 12px;font-family:'Space Mono',monospace;font-size:9px;color:var(--teal-l);outline:none}
-  .copy-btn{padding:8px 14px;background:var(--teal-d);border:1px solid var(--teal);
-    color:var(--teal-l);border-radius:8px;font-family:'Space Mono',monospace;font-size:10px;
-    letter-spacing:1px;cursor:pointer;white-space:nowrap;transition:all 0.2s}
-  .copy-btn:hover{background:var(--teal);color:white}
-  .modal-err{font-size:11px;color:#ff7070;font-family:'Space Mono',monospace;margin-bottom:10px;min-height:16px}
-  .modal-btns{display:flex;gap:10px;margin-top:6px}
-  .btn-mc{flex:1;padding:12px;background:transparent;border:1px solid var(--border);color:var(--muted);
-    border-radius:10px;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:1px;
-    text-transform:uppercase;cursor:pointer;transition:all 0.2s}
-  .btn-mc:hover{border-color:var(--red-d);color:var(--text)}
-  .btn-me{flex:2;padding:12px;background:linear-gradient(135deg,var(--teal),var(--teal-d));color:white;
-    border:1px solid var(--teal-l);border-radius:10px;font-family:'Space Mono',monospace;font-size:11px;
-    letter-spacing:1px;text-transform:uppercase;cursor:pointer;transition:all 0.2s;
-    box-shadow:0 4px 16px rgba(46,139,122,0.3)}
-  .btn-me:hover{transform:translateY(-1px)}
-  .spinner{display:inline-block;width:13px;height:13px;border:2px solid rgba(255,255,255,0.3);
-    border-top-color:white;border-radius:50%;animation:spin 0.7s linear infinite;
-    margin-right:7px;vertical-align:middle}
-  @keyframes spin{to{transform:rotate(360deg)}}
+/* SUCCESS */
+.success-screen{display:none;text-align:center;padding:70px 20px;animation:fadeUp 0.5s ease}
+.success-screen.active{display:block}
+.suc-icon{width:84px;height:84px;background:linear-gradient(135deg,var(--teal-d),#0e3a34);
+  border:2px solid var(--teal);border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-size:38px;margin:0 auto 24px;box-shadow:0 0 40px rgba(46,139,122,0.3)}
+.success-screen h2{font-family:'Bebas Neue',sans-serif;font-size:54px;letter-spacing:2px;color:var(--teal-l);margin-bottom:8px}
+.success-screen p{color:var(--muted);font-size:14px;margin-bottom:24px;line-height:1.7}
+.suc-detail{display:inline-block;background:var(--card);border:1px solid var(--border);
+  border-radius:10px;padding:12px 24px;font-family:'Space Mono',monospace;font-size:11px;
+  letter-spacing:1px;color:var(--teal-l);margin-bottom:28px}
+.btn-new{background:linear-gradient(135deg,var(--red),var(--red-d));color:white;
+  border:1px solid var(--red-l);padding:13px 28px;border-radius:10px;cursor:pointer;
+  font-family:'Space Mono',monospace;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;
+  box-shadow:0 4px 16px rgba(139,18,18,0.3);transition:all 0.2s}
+.btn-new:hover{transform:translateY(-1px)}
 
-  /* NUMBER SELECTOR */
-  .num-selector{display:flex;align-items:center;gap:0}
-  .num-btn{width:44px;height:46px;background:var(--card);border:1px solid var(--border);
-    color:var(--chalk);font-size:20px;cursor:pointer;transition:all 0.15s;display:flex;
-    align-items:center;justify-content:center;user-select:none}
-  .num-btn:first-child{border-radius:10px 0 0 10px;border-right:none}
-  .num-btn:last-child{border-radius:0 10px 10px 0;border-left:none}
-  .num-btn:hover{background:#2a0f0f;color:var(--red-l)}
-  .num-display{flex:1;height:46px;background:var(--card);border:1px solid var(--border);
-    display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;
-    font-size:28px;letter-spacing:2px;color:var(--chalk);min-width:80px}
+/* TOAST */
+.toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(80px);
+  background:#1a2e28;border:1px solid var(--teal);color:var(--teal-l);padding:12px 24px;
+  border-radius:10px;font-size:13px;font-family:'Space Mono',monospace;letter-spacing:0.5px;
+  z-index:999;transition:transform 0.3s ease;white-space:nowrap;max-width:90vw;text-align:center}
+.toast.show{transform:translateX(-50%) translateY(0)}
+.toast.err-toast{background:#2e1a1a;border-color:var(--red);color:#ff9090}
 
-  /* SECTION DIVIDER */
-  .divider{height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent);margin:28px 0}
+/* SPINNER */
+.spinner{display:inline-block;width:13px;height:13px;border:2px solid rgba(255,255,255,0.3);
+  border-top-color:white;border-radius:50%;animation:spin 0.7s linear infinite;margin-right:7px;vertical-align:middle}
+@keyframes spin{to{transform:rotate(360deg)}}
 
-  /* PIN MODAL */
-  .pin-box{background:#0e0707;border:1px solid #4a2020;border-top:4px solid var(--red);
-    border-radius:16px;padding:36px 32px;width:100%;max-width:340px;text-align:center}
-  .pin-title{font-family:'Bebas Neue',sans-serif;font-size:30px;letter-spacing:3px;color:var(--chalk);margin-bottom:4px}
-  .pin-sub{font-size:12px;color:var(--muted);margin-bottom:28px;font-family:'Space Mono',monospace;letter-spacing:0.5px}
-  .pin-dots{display:flex;justify-content:center;gap:12px;margin-bottom:24px}
-  .pin-dot{width:18px;height:18px;border-radius:50%;border:2px solid var(--border);
-    background:transparent;transition:all 0.2s}
-  .pin-dot.filled{background:var(--red);border-color:var(--red-l);box-shadow:0 0 8px rgba(139,18,18,0.5)}
-  .pin-dot.err{background:#ff3030;border-color:#ff5050;animation:shake 0.4s ease}
-  .pin-keypad{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;max-width:220px;margin:0 auto}
-  .pin-key{padding:14px 8px;background:var(--card);border:1px solid var(--border);
-    border-radius:10px;font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:1px;
-    color:var(--chalk);cursor:pointer;transition:all 0.15s;user-select:none}
-  .pin-key:hover{background:#2a0f0f;border-color:var(--red);color:var(--red-l)}
-  .pin-key:active{transform:scale(0.94)}
-  .pin-key.del{font-family:'Space Mono',monospace;font-size:14px;color:var(--muted)}
-  .pin-key.del:hover{color:var(--red-l)}
-  .pin-err-msg{font-family:'Space Mono',monospace;font-size:11px;color:#ff7070;
-    margin-top:16px;min-height:16px;letter-spacing:0.5px}
+/* PIN SCREEN */
+.pin-screen{display:flex;flex-direction:column;align-items:center;justify-content:center;
+  min-height:calc(100vh - 58px);padding:40px 20px;animation:fadeUp 0.3s ease}
+.pin-card{background:#120808;border:1px solid #4a2020;border-top:4px solid var(--red);
+  border-radius:18px;padding:40px 36px;width:100%;max-width:320px;text-align:center}
+.pin-icon{font-size:42px;margin-bottom:10px}
+.pin-title{font-family:'Bebas Neue',sans-serif;font-size:32px;letter-spacing:3px;color:var(--chalk);margin-bottom:4px}
+.pin-sub{font-size:12px;color:var(--muted);margin-bottom:28px;font-family:'Space Mono',monospace;letter-spacing:0.5px}
+.pin-dots{display:flex;justify-content:center;gap:14px;margin-bottom:28px}
+.pin-dot{width:20px;height:20px;border-radius:50%;border:2px solid var(--border);background:transparent;transition:all 0.2s}
+.pin-dot.filled{background:var(--red);border-color:var(--red-l);box-shadow:0 0 10px rgba(139,18,18,0.5)}
+.pin-dot.err-d{background:#ff3030;border-color:#ff5050}
+.pin-keypad{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;max-width:240px;margin:0 auto}
+.pin-key{padding:15px 8px;background:var(--card);border:1px solid var(--border);
+  border-radius:10px;font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:1px;
+  color:var(--chalk);cursor:pointer;transition:all 0.15s;user-select:none}
+.pin-key:hover{background:#2a0f0f;border-color:var(--red);color:var(--red-l)}
+.pin-key:active{transform:scale(0.93)}
+.pin-key.del{font-family:'Space Mono',monospace;font-size:14px;color:var(--muted)}
+.pin-key.del:hover{color:var(--red-l)}
+.pin-err-msg{font-family:'Space Mono',monospace;font-size:11px;color:#ff7070;margin-top:16px;min-height:16px;letter-spacing:0.5px}
+@keyframes shake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-8px)}40%,80%{transform:translateX(8px)}}
+.do-shake{animation:shake 0.4s ease}
 
-  /* Admin trigger — subtle, invisible until hovered */
-  .admin-trigger{position:fixed;bottom:16px;right:16px;width:32px;height:32px;
-    border-radius:50%;background:transparent;border:1px solid transparent;
-    cursor:pointer;transition:all 0.3s;z-index:50;display:flex;align-items:center;
-    justify-content:center;font-size:14px;opacity:0.15}
-  .admin-trigger:hover{opacity:1;border-color:var(--border);background:var(--card)}
+/* ADMIN PANEL */
+.admin-wrap{max-width:980px;margin:0 auto;padding:36px 20px 80px}
+.admin-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:28px;flex-wrap:wrap;gap:16px}
+.admin-header h2{font-family:'Bebas Neue',sans-serif;font-size:40px;letter-spacing:2px;color:var(--chalk)}
+.admin-header h2 span{color:var(--teal-l)}
+.admin-actions{display:flex;gap:8px;flex-wrap:wrap}
+.btn-sm{padding:9px 16px;border-radius:8px;font-family:'Space Mono',monospace;font-size:10px;
+  letter-spacing:1px;text-transform:uppercase;cursor:pointer;transition:all 0.2s;border:1px solid}
+.btn-sm.teal{background:var(--teal-d);border-color:var(--teal);color:var(--teal-l)}
+.btn-sm.teal:hover{background:var(--teal);color:white}
+.btn-sm.ghost{background:transparent;border-color:var(--border);color:var(--muted)}
+.btn-sm.ghost:hover{border-color:var(--teal);color:var(--teal-l)}
+.btn-sm.danger{background:transparent;border-color:#3a1a1a;color:#7a4040}
+.btn-sm.danger:hover{border-color:var(--red);color:var(--red-l)}
 
-  @keyframes shake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-6px)}40%,80%{transform:translateX(6px)}}
+/* Stats */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px;margin-bottom:28px}
+.stat{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:18px;text-align:center}
+.stat .val{font-family:'Bebas Neue',sans-serif;font-size:44px;line-height:1;color:var(--chalk)}
+.stat .lbl{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-top:4px}
+.stat.red .val{color:var(--red-l)}
+.stat.teal .val{color:var(--teal-l)}
+.stat.gold .val{color:var(--gold-l)}
 
-  @media(max-width:480px){
-    .vopt-grid.three{grid-template-columns:1fr 1fr}
-    .modal-box{padding:24px 18px}
-    .pin-box{padding:28px 20px}
-  }
+/* Filter */
+.filter-bar{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap}
+.filter-btn{padding:7px 14px;border-radius:20px;font-family:'Space Mono',monospace;font-size:9px;
+  letter-spacing:1px;text-transform:uppercase;cursor:pointer;border:1px solid var(--border);
+  color:var(--muted);background:transparent;transition:all 0.2s}
+.filter-btn:hover,.filter-btn.active{border-color:var(--teal);color:var(--teal-l);background:rgba(46,139,122,0.08)}
+.filter-btn.mrc.active{background:rgba(176,24,24,0.1);border-color:var(--mrc);color:var(--red-l)}
+.filter-btn.mee.active{background:rgba(46,139,122,0.1);border-color:var(--mee);color:var(--teal-l)}
+.filter-btn.mm.active{background:rgba(201,148,26,0.1);border-color:var(--mm);color:var(--gold-l)}
+
+/* Table */
+.resp-table-wrap{overflow-x:auto;border-radius:12px;border:1px solid var(--border)}
+.resp-table{width:100%;border-collapse:collapse;min-width:700px}
+.resp-table thead tr{border-bottom:1px solid var(--border)}
+.resp-table th{padding:12px 16px;text-align:left;font-family:'Space Mono',monospace;font-size:9px;
+  letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);background:#110808;white-space:nowrap}
+.resp-table td{padding:13px 16px;font-size:13px;border-bottom:1px solid rgba(58,26,26,0.4);vertical-align:middle}
+.resp-table tr:last-child td{border-bottom:none}
+.resp-table tr:hover td{background:rgba(255,255,255,0.015)}
+.team-pill{display:inline-block;padding:3px 10px;border-radius:20px;font-family:'Space Mono',monospace;font-size:9px;letter-spacing:1px;font-weight:700}
+.pill-mrc{background:rgba(176,24,24,0.15);color:var(--red-l);border:1px solid rgba(176,24,24,0.3)}
+.pill-mee{background:rgba(46,139,122,0.15);color:var(--teal-l);border:1px solid rgba(46,139,122,0.3)}
+.pill-mm{background:rgba(201,148,26,0.15);color:var(--gold-l);border:1px solid rgba(201,148,26,0.3)}
+.num-badge{font-family:'Bebas Neue',sans-serif;font-size:22px;color:var(--chalk);letter-spacing:1px}
+.empty-state{text-align:center;padding:60px 20px;color:var(--muted)}
+.empty-state .ei{font-size:48px;margin-bottom:12px}
+.empty-state p{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:1px}
+.loading-state{display:flex;align-items:center;justify-content:center;gap:10px;padding:48px;
+  color:var(--muted);font-family:'Space Mono',monospace;font-size:11px;letter-spacing:1px}
+.sync-row{display:flex;align-items:center;gap:10px;margin-top:6px}
+.sync-badge{display:inline-flex;align-items:center;gap:6px;font-family:'Space Mono',monospace;
+  font-size:9px;letter-spacing:1px;color:var(--teal-l);padding:4px 12px;border-radius:20px;
+  background:rgba(46,139,122,0.08);border:1px solid var(--teal-d)}
+.sync-dot{width:6px;height:6px;border-radius:50%;background:var(--teal-l);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.3}}
+
+@media(max-width:540px){
+  .vopt-grid.five{grid-template-columns:repeat(3,1fr)}
+  .pin-card{padding:28px 20px}
+  .nav-tab{padding:6px 10px;font-size:9px}
+  .admin-header{flex-direction:column}
+}
 </style>
 </head>
 <body>
 
-<!-- PIN GATE MODAL -->
-<div class="modal-overlay hidden" id="pin-modal">
-  <div class="pin-box">
-    <div class="pin-title">🔐 Admin</div>
-    <div class="pin-sub">Enter PIN to access setup</div>
-    <div class="pin-dots">
-      <div class="pin-dot" id="pd0"></div>
-      <div class="pin-dot" id="pd1"></div>
-      <div class="pin-dot" id="pd2"></div>
-      <div class="pin-dot" id="pd3"></div>
-    </div>
-    <div class="pin-keypad">
-      <button class="pin-key" onclick="pinKey('1')">1</button>
-      <button class="pin-key" onclick="pinKey('2')">2</button>
-      <button class="pin-key" onclick="pinKey('3')">3</button>
-      <button class="pin-key" onclick="pinKey('4')">4</button>
-      <button class="pin-key" onclick="pinKey('5')">5</button>
-      <button class="pin-key" onclick="pinKey('6')">6</button>
-      <button class="pin-key" onclick="pinKey('7')">7</button>
-      <button class="pin-key" onclick="pinKey('8')">8</button>
-      <button class="pin-key" onclick="pinKey('9')">9</button>
-      <button class="pin-key del" onclick="pinClear()">CLR</button>
-      <button class="pin-key" onclick="pinKey('0')">0</button>
-      <button class="pin-key del" onclick="pinBack()">⌫</button>
-    </div>
-    <div class="pin-err-msg" id="pin-err"></div>
-  </div>
-</div>
-
-<!-- SETUP MODAL -->
-<div class="modal-overlay" id="setup-modal">
-  <div class="modal-box">
-    <div class="modal-title">⚙️ Setup Required</div>
-    <div class="modal-sub">Connect this form to Google Sheets so responses are saved automatically.</div>
-    <div class="setup-note">
-      <div class="step-li"><div class="step-num">1</div><div>Open your Google Sheet → <strong>Extensions → Apps Script</strong></div></div>
-      <div class="step-li"><div class="step-num">2</div><div>Paste the Apps Script code below and <strong>Save</strong></div></div>
-      <div class="step-li"><div class="step-num">3</div><div>Click <strong>Deploy → New Deployment → Web App</strong></div></div>
-      <div class="step-li"><div class="step-num">4</div><div>Set <strong>Execute as: Me</strong> | <strong>Access: Anyone</strong> → Deploy</div></div>
-      <div class="step-li"><div class="step-num">5</div><div>Copy the Web App URL and paste it below</div></div>
-      <div class="copy-row">
-        <input type="text" id="script-preview" value="Click to copy Apps Script code →" readonly>
-        <button class="copy-btn" onclick="copyScript()">Copy Script</button>
-      </div>
-    </div>
-    <div class="modal-field">
-      <label>Google Apps Script URL</label>
-      <input type="text" id="setup-url" placeholder="https://script.google.com/macros/s/.../exec">
-    </div>
-    <div class="modal-err" id="setup-err"></div>
-    <div class="modal-btns">
-      <button class="btn-mc" onclick="closeSetup()">Skip for now</button>
-      <button class="btn-me" onclick="saveSetup()">Save & Continue</button>
-    </div>
-  </div>
-</div>
-
-<!-- TOAST -->
 <div class="toast" id="toast"></div>
-
-<!-- ADMIN TRIGGER (hidden, bottom-right corner) -->
-<button class="admin-trigger" onclick="openPinGate()" title="Admin">⚙</button>
 
 <!-- NAV -->
 <nav class="nav">
-  <div class="nav-logo">MAIEUTIC <span>|</span> JERSEY</div>
-  <div class="nav-badge">Sports Day 2026</div>
+  <div class="nav-logo" onclick="switchPage('form')">MAIEUTIC <span>|</span> JERSEY</div>
+  <div class="nav-tabs">
+    <button class="nav-tab active" id="tab-form" onclick="switchPage('form')">🏏 Form</button>
+    <button class="nav-tab admin-tab" id="tab-admin" onclick="switchPage('admin')">🔐 Admin</button>
+  </div>
 </nav>
 
-<!-- HERO -->
-<div class="hero">
-  <div class="hero-tag">🏏 Team Jersey Registration</div>
-  <h1>PICK YOUR <span>JERSEY</span></h1>
-  <p>Fill in your details to lock in your team jersey for Maieutic Sports Day 2026. Takes less than 2 minutes.</p>
+<!-- ════════════════ FORM PAGE ════════════════ -->
+<div class="page active" id="page-form">
+  <div class="hero" id="form-hero">
+    <div class="hero-tag">🏏 Team Jersey Registration</div>
+    <h1>PICK YOUR <span>JERSEY</span></h1>
+    <p>Fill in your details to lock in your team jersey for Maieutic Sports Day 2026. Takes less than 2 minutes.</p>
+  </div>
+
+  <div class="form-wrap" id="form-area">
+    <!-- Progress -->
+    <div class="prog-wrap">
+      <div class="prog-steps">
+        <span class="prog-step active" id="ps1">Team</span>
+        <span class="prog-step" id="ps2">Player</span>
+        <span class="prog-step" id="ps3">Jersey</span>
+        <span class="prog-step" id="ps4">Review</span>
+      </div>
+      <div class="prog-track"><div class="prog-fill" id="prog-fill"></div></div>
+    </div>
+
+    <!-- Step 1 -->
+    <div class="fsec active" id="sec1">
+      <div class="sec-title">
+        <div class="sec-icon">🏆</div>
+        <div class="sec-title-text"><div class="name">Select Your Team</div><div class="sub">Choose the team you're playing for</div></div>
+      </div>
+      <div class="sec-err" id="err-team">Please select your team to continue.</div>
+      <div class="field">
+        <label>Team <span class="req">*</span></label>
+        <div class="team-grid">
+          <div class="topt" data-team="MRC">
+            <input type="radio" name="team" id="t-mrc" value="MRC - Maieutic Royal Challengers">
+            <label for="t-mrc">
+              <div class="team-badge badge-mrc">MRC</div>
+              <div class="team-info"><div class="tname">Maieutic Royal Challengers</div><div class="owner">👑 Owner: Ravishankara B</div><div class="abbr abbr-mrc">MRC</div></div>
+              <div class="team-check">✓</div>
+            </label>
+          </div>
+          <div class="topt" data-team="MEE">
+            <input type="radio" name="team" id="t-mee" value="MEE - Maieutic Elite Eagle">
+            <label for="t-mee">
+              <div class="team-badge badge-mee">MEE</div>
+              <div class="team-info"><div class="tname">Maieutic Elite Eagle</div><div class="owner">👑 Owner: Mamatha Bhargav</div><div class="abbr abbr-mee">MEE</div></div>
+              <div class="team-check">✓</div>
+            </label>
+          </div>
+          <div class="topt" data-team="MM">
+            <input type="radio" name="team" id="t-mm" value="MM - Maieutic Mavericks">
+            <label for="t-mm">
+              <div class="team-badge badge-mm">MM</div>
+              <div class="team-info"><div class="tname">Maieutic Mavericks</div><div class="owner">👑 Owner: Manasa Yadhav</div><div class="abbr abbr-mm">MM</div></div>
+              <div class="team-check">✓</div>
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="fnav"><span></span><button class="btn btn-next" onclick="goSec(2)">Next →</button></div>
+    </div>
+
+    <!-- Step 2 -->
+    <div class="fsec" id="sec2">
+      <div class="sec-title">
+        <div class="sec-icon">🙋</div>
+        <div class="sec-title-text"><div class="name">Player Details</div><div class="sub">Your name as it appears on records</div></div>
+      </div>
+      <div class="field" id="f-name">
+        <label>Full Name <span class="req">*</span></label>
+        <input type="text" id="inp-name" placeholder="e.g. Ravi Shankar B" autocomplete="name">
+        <div class="ferr">Please enter your full name.</div>
+      </div>
+      <div class="field" id="f-jersey-name">
+        <label>Jersey Name <span class="req">*</span></label>
+        <input type="text" id="inp-jersey-name" maxlength="14" placeholder="e.g. RAVI  (max 14 chars, printed on back)">
+        <div class="ferr">Jersey name is required (max 14 characters).</div>
+      </div>
+      <div class="fnav">
+        <button class="btn btn-ghost" onclick="goSec(1)">← Back</button>
+        <button class="btn btn-next" onclick="goSec(3)">Next →</button>
+      </div>
+    </div>
+
+    <!-- Step 3 -->
+    <div class="fsec" id="sec3">
+      <div class="sec-title">
+        <div class="sec-icon">👕</div>
+        <div class="sec-title-text"><div class="name">Jersey Details</div><div class="sub">Number, size & sleeve style</div></div>
+      </div>
+      <div class="field">
+        <label>Jersey Number <span class="req">*</span> <span style="color:var(--muted);font-size:10px;font-family:Outfit,sans-serif;font-weight:400">(1 – 99)</span></label>
+        <div class="num-selector">
+          <button class="num-btn" onclick="changeNum(-1)" type="button">−</button>
+          <div class="num-display" id="num-display">07</div>
+          <button class="num-btn" onclick="changeNum(1)" type="button">+</button>
+        </div>
+        <input type="hidden" id="inp-number" value="7">
+      </div>
+      <div class="divider"></div>
+      <div class="field" id="f-size">
+        <label>Jersey Size <span class="req">*</span></label>
+        <div class="sec-err" id="err-size" style="margin-bottom:12px">Please select a size.</div>
+        <div class="vopt-grid five">
+          <div class="vopt"><input type="radio" name="size" id="sz-xs" value="XS"><label for="sz-xs"><div class="vcheck">✓</div><svg class="vopt-svg" viewBox="0 0 64 64" fill="none"><path d="M10 20 L20 14 L26 22 C28 26 36 26 38 22 L44 14 L54 20 L48 30 L44 30 L44 52 L20 52 L20 30 L16 30 Z" fill="#2a0f0f" stroke="#8B1212" stroke-width="1.5"/><text x="32" y="40" text-anchor="middle" fill="#ff7070" font-family="Bebas Neue" font-size="11">XS</text></svg><div class="vopt-title">XS</div></label></div>
+          <div class="vopt"><input type="radio" name="size" id="sz-s" value="S"><label for="sz-s"><div class="vcheck">✓</div><svg class="vopt-svg" viewBox="0 0 64 64" fill="none"><path d="M9 21 L19 14 L25 23 C27 27 37 27 39 23 L45 14 L55 21 L49 32 L45 32 L45 53 L19 53 L19 32 L15 32 Z" fill="#2a0f0f" stroke="#8B1212" stroke-width="1.5"/><text x="32" y="41" text-anchor="middle" fill="#ff7070" font-family="Bebas Neue" font-size="11">S</text></svg><div class="vopt-title">S</div></label></div>
+          <div class="vopt"><input type="radio" name="size" id="sz-m" value="M" checked><label for="sz-m"><div class="vcheck">✓</div><svg class="vopt-svg" viewBox="0 0 64 64" fill="none"><path d="M8 22 L18 14 L24 24 C26 28 38 28 40 24 L46 14 L56 22 L50 34 L46 34 L46 54 L18 54 L18 34 L14 34 Z" fill="#2a0f0f" stroke="#8B1212" stroke-width="1.5"/><text x="32" y="42" text-anchor="middle" fill="#ff7070" font-family="Bebas Neue" font-size="11">M</text></svg><div class="vopt-title">M</div></label></div>
+          <div class="vopt"><input type="radio" name="size" id="sz-l" value="L"><label for="sz-l"><div class="vcheck">✓</div><svg class="vopt-svg" viewBox="0 0 64 64" fill="none"><path d="M6 23 L17 14 L23 25 C25 29 39 29 41 25 L47 14 L58 23 L51 36 L47 36 L47 55 L17 55 L17 36 L13 36 Z" fill="#2a0f0f" stroke="#8B1212" stroke-width="1.5"/><text x="32" y="43" text-anchor="middle" fill="#ff7070" font-family="Bebas Neue" font-size="11">L</text></svg><div class="vopt-title">L</div></label></div>
+          <div class="vopt"><input type="radio" name="size" id="sz-xl" value="XL"><label for="sz-xl"><div class="vcheck">✓</div><svg class="vopt-svg" viewBox="0 0 64 64" fill="none"><path d="M4 24 L16 14 L22 26 C24 30 40 30 42 26 L48 14 L60 24 L52 38 L48 38 L48 56 L16 56 L16 38 L12 38 Z" fill="#2a0f0f" stroke="#8B1212" stroke-width="1.5"/><text x="32" y="44" text-anchor="middle" fill="#ff7070" font-family="Bebas Neue" font-size="10">XL</text></svg><div class="vopt-title">XL</div></label></div>
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="field" id="f-sleeve">
+        <label>Sleeve Style <span class="req">*</span></label>
+        <div class="sec-err" id="err-sleeve" style="margin-bottom:12px">Please choose a sleeve style.</div>
+        <div class="vopt-grid three">
+          <div class="vopt"><input type="radio" name="sleeve" id="sl-half" value="Half Sleeve" checked><label for="sl-half"><div class="vcheck">✓</div><svg class="vopt-svg" viewBox="0 0 64 64" fill="none"><path d="M8 22 L18 14 L24 24 C26 28 38 28 40 24 L46 14 L56 22 L52 32 L46 30 L46 54 L18 54 L18 30 L12 32 Z" fill="#1d0a0a" stroke="#8B1212" stroke-width="1.5"/><path d="M8 22 L12 32 L18 30 L18 22" fill="#2a0f0f" stroke="#8B1212" stroke-width="1"/><path d="M56 22 L52 32 L46 30 L46 22" fill="#2a0f0f" stroke="#8B1212" stroke-width="1"/><path d="M24 24 C26 28 38 28 40 24" stroke="#c44" stroke-width="1" fill="none"/></svg><div class="vopt-title">Half</div><div class="vopt-sub">Short sleeve</div></label></div>
+          <div class="vopt"><input type="radio" name="sleeve" id="sl-full" value="Full Sleeve"><label for="sl-full"><div class="vcheck">✓</div><svg class="vopt-svg" viewBox="0 0 64 64" fill="none"><path d="M8 22 L18 14 L24 24 C26 28 38 28 40 24 L46 14 L56 22 L58 46 L46 48 L46 54 L18 54 L18 48 L6 46 Z" fill="#1d0a0a" stroke="#8B1212" stroke-width="1.5"/><path d="M8 22 L6 46 L18 48 L18 22" fill="#2a0f0f" stroke="#8B1212" stroke-width="1"/><path d="M56 22 L58 46 L46 48 L46 22" fill="#2a0f0f" stroke="#8B1212" stroke-width="1"/><path d="M6 44 L18 46" stroke="#c44" stroke-width="1.5"/><path d="M58 44 L46 46" stroke="#c44" stroke-width="1.5"/><path d="M24 24 C26 28 38 28 40 24" stroke="#c44" stroke-width="1" fill="none"/></svg><div class="vopt-title">Full</div><div class="vopt-sub">Long sleeve</div></label></div>
+          <div class="vopt"><input type="radio" name="sleeve" id="sl-slvless" value="Sleeveless"><label for="sl-slvless"><div class="vcheck">✓</div><svg class="vopt-svg" viewBox="0 0 64 64" fill="none"><path d="M18 18 L24 24 C26 28 38 28 40 24 L46 18 L46 54 L18 54 Z" fill="#1d0a0a" stroke="#8B1212" stroke-width="1.5"/><path d="M18 18 C18 18 14 22 14 30 L18 30" stroke="#8B1212" stroke-width="1" fill="none"/><path d="M46 18 C46 18 50 22 50 30 L46 30" stroke="#8B1212" stroke-width="1" fill="none"/><path d="M24 24 C26 28 38 28 40 24" stroke="#c44" stroke-width="1" fill="none"/></svg><div class="vopt-title">Sleeveless</div><div class="vopt-sub">Tank / vest</div></label></div>
+        </div>
+      </div>
+      <div class="fnav">
+        <button class="btn btn-ghost" onclick="goSec(2)">← Back</button>
+        <button class="btn btn-next" onclick="goSec(4)">Next →</button>
+      </div>
+    </div>
+
+    <!-- Step 4 -->
+    <div class="fsec" id="sec4">
+      <div class="sec-title">
+        <div class="sec-icon">✅</div>
+        <div class="sec-title-text"><div class="name">Review & Submit</div><div class="sub">Double-check before submitting</div></div>
+      </div>
+      <div class="summary-grid" id="summary-grid"></div>
+      <div style="margin-top:18px;padding:13px 16px;background:#0a1a18;border:1px solid #1d5c54;border-radius:10px;font-size:12px;color:#6a9e9a;font-family:'Space Mono',monospace;line-height:1.7">
+        📝 Your details save directly to the team's Google Sheet once submitted.
+      </div>
+      <div class="fnav">
+        <button class="btn btn-ghost" onclick="goSec(3)">← Back</button>
+        <button class="btn btn-submit" id="submit-btn" onclick="submitForm()">🏏 Submit Jersey Details</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Success -->
+  <div class="success-screen" id="success-screen">
+    <div class="suc-icon">🏏</div>
+    <h2>Jersey Locked!</h2>
+    <p>Your jersey details have been saved successfully.<br>Get ready to play! 🎉</p>
+    <div class="suc-detail" id="suc-detail">— — —</div><br>
+    <button class="btn-new" onclick="resetForm()">Add Another Player</button>
+  </div>
 </div>
 
-<!-- FORM -->
-<div class="form-wrap" id="form-area">
-  <!-- PROGRESS -->
-  <div class="prog-wrap">
-    <div class="prog-steps">
-      <span class="prog-step active" id="ps1">Team</span>
-      <span class="prog-step" id="ps2">Player</span>
-      <span class="prog-step" id="ps3">Jersey</span>
-      <span class="prog-step" id="ps4">Review</span>
-    </div>
-    <div class="prog-track"><div class="prog-fill" id="prog-fill"></div></div>
-  </div>
 
-  <!-- SECTION 1: TEAM -->
-  <div class="fsec active" id="sec1">
-    <div class="sec-title">
-      <div class="sec-icon">🏆</div>
-      <div class="sec-title-text">
-        <div class="name">Select Your Team</div>
-        <div class="sub">Choose the team you're playing for</div>
+<!-- ════════════════ ADMIN PAGE ════════════════ -->
+<div class="page" id="page-admin">
+
+  <!-- PIN SCREEN -->
+  <div class="pin-screen" id="pin-screen">
+    <div class="pin-card" id="pin-card">
+      <div class="pin-icon">🔐</div>
+      <div class="pin-title">Admin Access</div>
+      <div class="pin-sub">Enter your 4-digit PIN</div>
+      <div class="pin-dots">
+        <div class="pin-dot" id="pd0"></div>
+        <div class="pin-dot" id="pd1"></div>
+        <div class="pin-dot" id="pd2"></div>
+        <div class="pin-dot" id="pd3"></div>
       </div>
-    </div>
-    <div class="sec-err" id="err-team">Please select your team to continue.</div>
-    <div class="field">
-      <label>Team <span class="req">*</span></label>
-      <div class="team-grid">
-
-        <div class="topt" data-team="MRC">
-          <input type="radio" name="team" id="t-mrc" value="MRC - Maieutic Royal Challengers">
-          <label for="t-mrc">
-            <div class="team-badge badge-mrc">MRC</div>
-            <div class="team-info">
-              <div class="tname">Maieutic Royal Challengers</div>
-              <div class="owner">👑 Owner: Ravishankara B</div>
-              <div class="abbr abbr-mrc">MRC</div>
-            </div>
-            <div class="team-check">✓</div>
-          </label>
-        </div>
-
-        <div class="topt" data-team="MEE">
-          <input type="radio" name="team" id="t-mee" value="MEE - Maieutic Elite Eagle">
-          <label for="t-mee">
-            <div class="team-badge badge-mee">MEE</div>
-            <div class="team-info">
-              <div class="tname">Maieutic Elite Eagle</div>
-              <div class="owner">👑 Owner: Mamatha Bhargav</div>
-              <div class="abbr abbr-mee">MEE</div>
-            </div>
-            <div class="team-check">✓</div>
-          </label>
-        </div>
-
-        <div class="topt" data-team="MM">
-          <input type="radio" name="team" id="t-mm" value="MM - Maieutic Mavericks">
-          <label for="t-mm">
-            <div class="team-badge badge-mm">MM</div>
-            <div class="team-info">
-              <div class="tname">Maieutic Mavericks</div>
-              <div class="owner">👑 Owner: Manasa Yadhav</div>
-              <div class="abbr abbr-mm">MM</div>
-            </div>
-            <div class="team-check">✓</div>
-          </label>
-        </div>
-
+      <div class="pin-keypad">
+        <button class="pin-key" onclick="pinKey('1')">1</button>
+        <button class="pin-key" onclick="pinKey('2')">2</button>
+        <button class="pin-key" onclick="pinKey('3')">3</button>
+        <button class="pin-key" onclick="pinKey('4')">4</button>
+        <button class="pin-key" onclick="pinKey('5')">5</button>
+        <button class="pin-key" onclick="pinKey('6')">6</button>
+        <button class="pin-key" onclick="pinKey('7')">7</button>
+        <button class="pin-key" onclick="pinKey('8')">8</button>
+        <button class="pin-key" onclick="pinKey('9')">9</button>
+        <button class="pin-key del" onclick="pinClear()">CLR</button>
+        <button class="pin-key" onclick="pinKey('0')">0</button>
+        <button class="pin-key del" onclick="pinBack()">⌫</button>
       </div>
-    </div>
-    <div class="fnav">
-      <span></span>
-      <button class="btn btn-next" onclick="goSec(2)">Next →</button>
+      <div class="pin-err-msg" id="pin-err"></div>
     </div>
   </div>
 
-  <!-- SECTION 2: PLAYER -->
-  <div class="fsec" id="sec2">
-    <div class="sec-title">
-      <div class="sec-icon">🙋</div>
-      <div class="sec-title-text">
-        <div class="name">Player Details</div>
-        <div class="sub">Your full name as it appears on the jersey</div>
+  <!-- ADMIN DASHBOARD -->
+  <div id="admin-panel" style="display:none">
+    <div class="admin-wrap">
+      <div class="admin-header">
+        <div>
+          <h2>Jersey <span>Dashboard</span></h2>
+          <div class="sync-row">
+            <div class="sync-badge"><div class="sync-dot"></div>Live Sync Active</div>
+          </div>
+        </div>
+        <div class="admin-actions">
+          <button class="btn-sm teal" onclick="loadAdminData()">⟳ Refresh</button>
+          <button class="btn-sm ghost" onclick="exportCSV()">↓ Export CSV</button>
+          <button class="btn-sm danger" onclick="lockAdmin()">🔒 Lock Panel</button>
+        </div>
       </div>
-    </div>
-    <div class="field" id="f-name">
-      <label>Full Name <span class="req">*</span></label>
-      <input type="text" id="inp-name" placeholder="e.g. Ravi Shankar B" autocomplete="name">
-      <div class="ferr">Please enter your full name.</div>
-    </div>
-    <div class="field" id="f-jersey-name">
-      <label>Jersey Name <span class="req">*</span></label>
-      <input type="text" id="inp-jersey-name" maxlength="14" placeholder="e.g. RAVI (max 14 chars, appears on back)">
-      <div class="ferr">Jersey name is required (max 14 characters).</div>
-    </div>
-    <div class="fnav">
-      <button class="btn btn-ghost" onclick="goSec(1)">← Back</button>
-      <button class="btn btn-next" onclick="goSec(3)">Next →</button>
+
+      <div class="stats">
+        <div class="stat"><div class="val" id="s-total">—</div><div class="lbl">Total Entries</div></div>
+        <div class="stat red"><div class="val" id="s-mrc">—</div><div class="lbl">MRC</div></div>
+        <div class="stat teal"><div class="val" id="s-mee">—</div><div class="lbl">MEE</div></div>
+        <div class="stat gold"><div class="val" id="s-mm">—</div><div class="lbl">MM</div></div>
+      </div>
+
+      <div class="filter-bar">
+        <button class="filter-btn active" onclick="setFilter('all',this)">All Teams</button>
+        <button class="filter-btn mrc" onclick="setFilter('MRC',this)">MRC</button>
+        <button class="filter-btn mee" onclick="setFilter('MEE',this)">MEE</button>
+        <button class="filter-btn mm" onclick="setFilter('MM',this)">MM</button>
+      </div>
+
+      <div class="resp-table-wrap">
+        <div id="table-container">
+          <div class="loading-state"><span class="spinner" style="border-top-color:var(--teal-l)"></span>Loading data...</div>
+        </div>
+      </div>
     </div>
   </div>
 
-  <!-- SECTION 3: JERSEY DETAILS -->
-  <div class="fsec" id="sec3">
-    <div class="sec-title">
-      <div class="sec-icon">👕</div>
-      <div class="sec-title-text">
-        <div class="name">Jersey Details</div>
-        <div class="sub">Number, size, and sleeve style</div>
-      </div>
-    </div>
-
-    <!-- Jersey Number -->
-    <div class="field" id="f-number">
-      <label>Jersey Number <span class="req">*</span> <span style="color:var(--muted);font-size:10px;letter-spacing:0">(1 – 99)</span></label>
-      <div class="num-selector">
-        <button class="num-btn" onclick="changeNum(-1)" type="button">−</button>
-        <div class="num-display" id="num-display">07</div>
-        <button class="num-btn" onclick="changeNum(1)" type="button">+</button>
-      </div>
-      <input type="hidden" id="inp-number" value="7">
-      <div class="ferr" id="ferr-number">Please choose a jersey number.</div>
-    </div>
-
-    <div class="divider"></div>
-
-    <!-- Jersey Size -->
-    <div class="field" id="f-size">
-      <label>Jersey Size <span class="req">*</span></label>
-      <div class="sec-err" id="err-size" style="margin-bottom:12px">Please select a size.</div>
-      <div class="vopt-grid" style="grid-template-columns:repeat(5,1fr)">
-
-        <div class="vopt">
-          <input type="radio" name="size" id="sz-xs" value="XS">
-          <label for="sz-xs">
-            <div class="vcheck">✓</div>
-            <svg class="vopt-svg" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M10 20 L20 14 L26 22 C28 26 36 26 38 22 L44 14 L54 20 L48 30 L44 30 L44 52 L20 52 L20 30 L16 30 Z" fill="#2a0f0f" stroke="#8B1212" stroke-width="1.5"/>
-              <text x="32" y="40" text-anchor="middle" fill="#ff7070" font-family="Bebas Neue,sans-serif" font-size="11">XS</text>
-            </svg>
-            <div class="vopt-title">XS</div>
-          </label>
-        </div>
-
-        <div class="vopt">
-          <input type="radio" name="size" id="sz-s" value="S">
-          <label for="sz-s">
-            <div class="vcheck">✓</div>
-            <svg class="vopt-svg" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M9 21 L19 14 L25 23 C27 27 37 27 39 23 L45 14 L55 21 L49 32 L45 32 L45 53 L19 53 L19 32 L15 32 Z" fill="#2a0f0f" stroke="#8B1212" stroke-width="1.5"/>
-              <text x="32" y="41" text-anchor="middle" fill="#ff7070" font-family="Bebas Neue,sans-serif" font-size="11">S</text>
-            </svg>
-            <div class="vopt-title">S</div>
-          </label>
-        </div>
-
-        <div class="vopt">
-          <input type="radio" name="size" id="sz-m" value="M" checked>
-          <label for="sz-m">
-            <div class="vcheck">✓</div>
-            <svg class="vopt-svg" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M8 22 L18 14 L24 24 C26 28 38 28 40 24 L46 14 L56 22 L50 34 L46 34 L46 54 L18 54 L18 34 L14 34 Z" fill="#2a0f0f" stroke="#8B1212" stroke-width="1.5"/>
-              <text x="32" y="42" text-anchor="middle" fill="#ff7070" font-family="Bebas Neue,sans-serif" font-size="11">M</text>
-            </svg>
-            <div class="vopt-title">M</div>
-          </label>
-        </div>
-
-        <div class="vopt">
-          <input type="radio" name="size" id="sz-l" value="L">
-          <label for="sz-l">
-            <div class="vcheck">✓</div>
-            <svg class="vopt-svg" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M6 23 L17 14 L23 25 C25 29 39 29 41 25 L47 14 L58 23 L51 36 L47 36 L47 55 L17 55 L17 36 L13 36 Z" fill="#2a0f0f" stroke="#8B1212" stroke-width="1.5"/>
-              <text x="32" y="43" text-anchor="middle" fill="#ff7070" font-family="Bebas Neue,sans-serif" font-size="11">L</text>
-            </svg>
-            <div class="vopt-title">L</div>
-          </label>
-        </div>
-
-        <div class="vopt">
-          <input type="radio" name="size" id="sz-xl" value="XL">
-          <label for="sz-xl">
-            <div class="vcheck">✓</div>
-            <svg class="vopt-svg" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M4 24 L16 14 L22 26 C24 30 40 30 42 26 L48 14 L60 24 L52 38 L48 38 L48 56 L16 56 L16 38 L12 38 Z" fill="#2a0f0f" stroke="#8B1212" stroke-width="1.5"/>
-              <text x="32" y="44" text-anchor="middle" fill="#ff7070" font-family="Bebas Neue,sans-serif" font-size="10">XL</text>
-            </svg>
-            <div class="vopt-title">XL</div>
-          </label>
-        </div>
-
-      </div>
-    </div>
-
-    <div class="divider"></div>
-
-    <!-- Sleeve Style -->
-    <div class="field" id="f-sleeve">
-      <label>Sleeve Style <span class="req">*</span></label>
-      <div class="sec-err" id="err-sleeve" style="margin-bottom:12px">Please choose a sleeve style.</div>
-      <div class="vopt-grid three">
-
-        <div class="vopt">
-          <input type="radio" name="sleeve" id="sl-half" value="Half Sleeve" checked>
-          <label for="sl-half">
-            <div class="vcheck">✓</div>
-            <!-- Half Sleeve Jersey SVG -->
-            <svg class="vopt-svg" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M8 22 L18 14 L24 24 C26 28 38 28 40 24 L46 14 L56 22 L52 32 L46 30 L46 54 L18 54 L18 30 L12 32 Z" fill="#1d0a0a" stroke="#8B1212" stroke-width="1.5"/>
-              <!-- short sleeves -->
-              <path d="M8 22 L12 32 L18 30 L18 22" fill="#2a0f0f" stroke="#8B1212" stroke-width="1"/>
-              <path d="M56 22 L52 32 L46 30 L46 22" fill="#2a0f0f" stroke="#8B1212" stroke-width="1"/>
-              <!-- collar -->
-              <path d="M24 24 C26 28 38 28 40 24" stroke="#c44" stroke-width="1" fill="none"/>
-            </svg>
-            <div class="vopt-title">Half</div>
-            <div class="vopt-sub">Short sleeve</div>
-          </label>
-        </div>
-
-        <div class="vopt">
-          <input type="radio" name="sleeve" id="sl-full" value="Full Sleeve">
-          <label for="sl-full">
-            <div class="vcheck">✓</div>
-            <!-- Full Sleeve Jersey SVG -->
-            <svg class="vopt-svg" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M8 22 L18 14 L24 24 C26 28 38 28 40 24 L46 14 L56 22 L58 46 L46 48 L46 54 L18 54 L18 48 L6 46 Z" fill="#1d0a0a" stroke="#8B1212" stroke-width="1.5"/>
-              <!-- long sleeves -->
-              <path d="M8 22 L6 46 L18 48 L18 22" fill="#2a0f0f" stroke="#8B1212" stroke-width="1"/>
-              <path d="M56 22 L58 46 L46 48 L46 22" fill="#2a0f0f" stroke="#8B1212" stroke-width="1"/>
-              <!-- cuffs -->
-              <path d="M6 44 L18 46" stroke="#c44" stroke-width="1.5"/>
-              <path d="M58 44 L46 46" stroke="#c44" stroke-width="1.5"/>
-              <!-- collar -->
-              <path d="M24 24 C26 28 38 28 40 24" stroke="#c44" stroke-width="1" fill="none"/>
-            </svg>
-            <div class="vopt-title">Full</div>
-            <div class="vopt-sub">Long sleeve</div>
-          </label>
-        </div>
-
-        <div class="vopt">
-          <input type="radio" name="sleeve" id="sl-slvless" value="Sleeveless">
-          <label for="sl-slvless">
-            <div class="vcheck">✓</div>
-            <!-- Sleeveless Jersey SVG -->
-            <svg class="vopt-svg" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <!-- body only, cut-in armholes -->
-              <path d="M18 18 L24 24 C26 28 38 28 40 24 L46 18 L46 54 L18 54 Z" fill="#1d0a0a" stroke="#8B1212" stroke-width="1.5"/>
-              <!-- armhole curves -->
-              <path d="M18 18 C18 18 14 22 14 30 L18 30" stroke="#8B1212" stroke-width="1" fill="none"/>
-              <path d="M46 18 C46 18 50 22 50 30 L46 30" stroke="#8B1212" stroke-width="1" fill="none"/>
-              <!-- collar -->
-              <path d="M24 24 C26 28 38 28 40 24" stroke="#c44" stroke-width="1" fill="none"/>
-            </svg>
-            <div class="vopt-title">Sleeveless</div>
-            <div class="vopt-sub">Tank / vest</div>
-          </label>
-        </div>
-
-      </div>
-    </div>
-
-    <div class="fnav">
-      <button class="btn btn-ghost" onclick="goSec(2)">← Back</button>
-      <button class="btn btn-next" onclick="goSec(4)">Next →</button>
-    </div>
-  </div>
-
-  <!-- SECTION 4: REVIEW -->
-  <div class="fsec" id="sec4">
-    <div class="sec-title">
-      <div class="sec-icon">✅</div>
-      <div class="sec-title-text">
-        <div class="name">Review & Submit</div>
-        <div class="sub">Double-check your details before submitting</div>
-      </div>
-    </div>
-
-    <div class="summary-grid" id="summary-grid">
-      <!-- Filled by JS -->
-    </div>
-
-    <div style="margin-top:20px;padding:14px 16px;background:#0a1a18;border:1px solid #1d5c54;border-radius:10px;font-size:12px;color:#6a9e9a;font-family:'Space Mono',monospace;line-height:1.7">
-      📝 Your details will be saved directly to the team's Google Sheet once submitted.
-    </div>
-
-    <div class="fnav">
-      <button class="btn btn-ghost" onclick="goSec(3)">← Back</button>
-      <button class="btn btn-submit" id="submit-btn" onclick="submitForm()">
-        🏏 Submit Jersey Details
-      </button>
-    </div>
-  </div>
-
-</div><!-- end form-wrap -->
-
-<!-- SUCCESS -->
-<div class="success-screen" id="success-screen">
-  <div class="suc-icon">🏏</div>
-  <h2>Jersey Locked!</h2>
-  <p>Your jersey details have been saved successfully.<br>Get ready to play! 🎉</p>
-  <div class="suc-detail" id="suc-detail">— — —</div>
-  <br>
-  <button class="btn-new" onclick="resetForm()">Add Another Player</button>
 </div>
 
 <script>
-// ── STATE ──────────────────────────────────────────────────────────────────
-let curSec = 1;
-let jerseyNum = 7;
-const totalSecs = 4;
+// ── CONFIG ─────────────────────────────────────────────────────────────────
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwGXZFTLfua9swXwPtPuwZK7HYzJxaKZW2a32lj33xFgmy17NpN2ltuF_8-W386tq19/exec';
+const ADMIN_PIN  = '4454';
 
-// Apps Script URL — stored in localStorage
-const LS_KEY = 'maieutic_jersey_script_url';
-let scriptUrl = localStorage.getItem(LS_KEY) || '';
+// ── STATE ──────────────────────────────────────────────────────────────────
+let curSec        = 1;
+let jerseyNum     = 7;
+let adminUnlocked = false;
+let pinEntry      = '';
+let allData       = [];
+let curFilter     = 'all';
 
 // ── INIT ───────────────────────────────────────────────────────────────────
-window.addEventListener('load', () => {
-  setProgress(1);
-  updateNumDisplay();
-  // No auto-open — setup is admin-only via PIN
-});
+window.addEventListener('load', () => { setProgress(1); updateNumDisplay(); });
 
-// ── PIN GATE ───────────────────────────────────────────────────────────────
-const ADMIN_PIN = '4454';
-let pinEntry = '';
-
-function openPinGate() {
-  pinEntry = '';
-  updatePinDots();
-  document.getElementById('pin-err').textContent = '';
-  document.getElementById('pin-modal').classList.remove('hidden');
-}
-
-function closePinGate() {
-  document.getElementById('pin-modal').classList.add('hidden');
-  pinEntry = '';
-  updatePinDots();
-}
-
-function pinKey(digit) {
-  if (pinEntry.length >= 4) return;
-  pinEntry += digit;
-  updatePinDots();
-  if (pinEntry.length === 4) {
-    setTimeout(checkPin, 120);
-  }
-}
-
-function pinBack() {
-  pinEntry = pinEntry.slice(0, -1);
-  updatePinDots();
-}
-
-function pinClear() {
-  pinEntry = '';
-  updatePinDots();
-}
-
-function updatePinDots() {
-  for (let i = 0; i < 4; i++) {
-    const dot = document.getElementById('pd' + i);
-    dot.className = 'pin-dot' + (i < pinEntry.length ? ' filled' : '');
-  }
-}
-
-function checkPin() {
-  if (pinEntry === ADMIN_PIN) {
-    closePinGate();
-    openSetup();
-  } else {
-    // Flash red dots
-    for (let i = 0; i < 4; i++) {
-      document.getElementById('pd' + i).className = 'pin-dot err';
-    }
-    document.getElementById('pin-err').textContent = '✗ Incorrect PIN';
-    setTimeout(() => {
-      pinEntry = '';
-      updatePinDots();
+// ── PAGE SWITCH ────────────────────────────────────────────────────────────
+function switchPage(name) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('page-' + name).classList.add('active');
+  document.getElementById('tab-' + name).classList.add('active');
+  if (name === 'admin') {
+    if (adminUnlocked) {
+      document.getElementById('pin-screen').style.display = 'none';
+      document.getElementById('admin-panel').style.display = 'block';
+    } else {
+      document.getElementById('pin-screen').style.display = 'flex';
+      document.getElementById('admin-panel').style.display = 'none';
+      pinEntry = ''; updatePinDots();
       document.getElementById('pin-err').textContent = '';
-    }, 900);
+    }
   }
 }
 
-// ── SETUP MODAL ────────────────────────────────────────────────────────────
-function openSetup() {
-  document.getElementById('setup-modal').classList.remove('hidden');
-  document.getElementById('setup-url').value = scriptUrl;
-}
-
-function closeSetup() {
-  document.getElementById('setup-modal').classList.add('hidden');
-}
-
-function saveSetup() {
-  const url = document.getElementById('setup-url').value.trim();
-  if (!url || !url.startsWith('https://script.google.com')) {
-    document.getElementById('setup-err').textContent = '⚠ Please enter a valid Google Apps Script URL.';
-    return;
-  }
-  scriptUrl = url;
-  localStorage.setItem(LS_KEY, url);
-  closeSetup();
-  showToast('✅ Script URL saved!');
-}
-
-function copyScript() {
-  const script = getAppsScript();
-  navigator.clipboard.writeText(script).then(() => showToast('Apps Script copied to clipboard!'));
-}
-
-// ── PROGRESS ───────────────────────────────────────────────────────────────
+// ── FORM ───────────────────────────────────────────────────────────────────
 function setProgress(sec) {
-  const pct = ((sec - 1) / (totalSecs - 1)) * 100;
-  document.getElementById('prog-fill').style.width = pct + '%';
-  for (let i = 1; i <= totalSecs; i++) {
-    const el = document.getElementById('ps' + i);
-    el.className = 'prog-step' + (i < sec ? ' done' : i === sec ? ' active' : '');
+  document.getElementById('prog-fill').style.width = (((sec-1)/(3))*100)+'%';
+  for(let i=1;i<=4;i++){
+    const e=document.getElementById('ps'+i);
+    e.className='prog-step'+(i<sec?' done':i===sec?' active':'');
   }
 }
-
-// ── NAVIGATION ─────────────────────────────────────────────────────────────
 function goSec(to) {
-  if (to > curSec && !validateSec(curSec)) return;
-  document.getElementById('sec' + curSec).classList.remove('active');
-  curSec = to;
-  document.getElementById('sec' + curSec).classList.add('active');
-  setProgress(curSec);
-  if (curSec === 4) buildSummary();
-  window.scrollTo({top: 0, behavior: 'smooth'});
+  if(to>curSec && !validateSec(curSec)) return;
+  document.getElementById('sec'+curSec).classList.remove('active');
+  curSec=to;
+  document.getElementById('sec'+to).classList.add('active');
+  setProgress(to);
+  if(to===4) buildSummary();
+  window.scrollTo({top:0,behavior:'smooth'});
 }
-
-// ── VALIDATION ─────────────────────────────────────────────────────────────
 function validateSec(sec) {
-  if (sec === 1) {
-    const ok = !!document.querySelector('input[name="team"]:checked');
-    document.getElementById('err-team').classList.toggle('show', !ok);
-    return ok;
+  if(sec===1){
+    const ok=!!document.querySelector('input[name="team"]:checked');
+    document.getElementById('err-team').classList.toggle('show',!ok); return ok;
   }
-  if (sec === 2) {
-    let ok = true;
-    const name = document.getElementById('inp-name').value.trim();
-    const jname = document.getElementById('inp-jersey-name').value.trim();
-    setFieldErr('f-name', !name);
-    setFieldErr('f-jersey-name', !jname);
-    if (!name || !jname) ok = false;
-    return ok;
+  if(sec===2){
+    const n=document.getElementById('inp-name').value.trim();
+    const j=document.getElementById('inp-jersey-name').value.trim();
+    setFE('f-name',!n); setFE('f-jersey-name',!j); return !!(n&&j);
   }
-  if (sec === 3) {
-    const szOk = !!document.querySelector('input[name="size"]:checked');
-    const slOk = !!document.querySelector('input[name="sleeve"]:checked');
-    document.getElementById('err-size').classList.toggle('show', !szOk);
-    document.getElementById('err-sleeve').classList.toggle('show', !slOk);
-    return szOk && slOk;
+  if(sec===3){
+    const s=!!document.querySelector('input[name="size"]:checked');
+    const sl=!!document.querySelector('input[name="sleeve"]:checked');
+    document.getElementById('err-size').classList.toggle('show',!s);
+    document.getElementById('err-sleeve').classList.toggle('show',!sl); return s&&sl;
   }
   return true;
 }
-
-function setFieldErr(id, isErr) {
-  document.getElementById(id).classList.toggle('err', isErr);
-}
-
-// ── NUMBER CONTROL ─────────────────────────────────────────────────────────
-function changeNum(delta) {
-  jerseyNum = Math.min(99, Math.max(1, jerseyNum + delta));
-  document.getElementById('inp-number').value = jerseyNum;
-  updateNumDisplay();
-}
-
-function updateNumDisplay() {
-  document.getElementById('num-display').textContent = String(jerseyNum).padStart(2, '0');
-}
-
-// ── SUMMARY ────────────────────────────────────────────────────────────────
-function buildSummary() {
-  const team = document.querySelector('input[name="team"]:checked')?.value || '—';
-  const name = document.getElementById('inp-name').value.trim() || '—';
-  const jname = document.getElementById('inp-jersey-name').value.trim() || '—';
-  const num = jerseyNum;
-  const size = document.querySelector('input[name="size"]:checked')?.value || '—';
-  const sleeve = document.querySelector('input[name="sleeve"]:checked')?.value || '—';
-
-  document.getElementById('summary-grid').innerHTML = `
-    <div class="srow highlight">
-      <span class="slabel">Team</span>
-      <span class="sval">${team}</span>
-    </div>
-    <div class="srow">
-      <span class="slabel">Full Name</span>
-      <span class="sval">${name}</span>
-    </div>
-    <div class="srow">
-      <span class="slabel">Jersey Name</span>
-      <span class="sval">${jname}</span>
-    </div>
-    <div class="srow">
-      <span class="slabel">Jersey Number</span>
-      <span class="sval">#${String(num).padStart(2, '0')}</span>
-    </div>
-    <div class="srow">
-      <span class="slabel">Size</span>
-      <span class="sval">${size}</span>
-    </div>
-    <div class="srow">
-      <span class="slabel">Sleeve Style</span>
-      <span class="sval">${sleeve}</span>
-    </div>
-  `;
+function setFE(id,isErr){document.getElementById(id).classList.toggle('err',isErr);}
+function changeNum(d){jerseyNum=Math.min(99,Math.max(1,jerseyNum+d));document.getElementById('inp-number').value=jerseyNum;updateNumDisplay();}
+function updateNumDisplay(){document.getElementById('num-display').textContent=String(jerseyNum).padStart(2,'0');}
+function buildSummary(){
+  const team=document.querySelector('input[name="team"]:checked')?.value||'—';
+  const name=document.getElementById('inp-name').value.trim()||'—';
+  const jn=document.getElementById('inp-jersey-name').value.trim()||'—';
+  const size=document.querySelector('input[name="size"]:checked')?.value||'—';
+  const sl=document.querySelector('input[name="sleeve"]:checked')?.value||'—';
+  document.getElementById('summary-grid').innerHTML=`
+    <div class="srow highlight"><span class="slabel">Team</span><span class="sval">${team}</span></div>
+    <div class="srow"><span class="slabel">Full Name</span><span class="sval">${name}</span></div>
+    <div class="srow"><span class="slabel">Jersey Name</span><span class="sval">${jn}</span></div>
+    <div class="srow"><span class="slabel">Jersey Number</span><span class="sval">#${String(jerseyNum).padStart(2,'0')}</span></div>
+    <div class="srow"><span class="slabel">Size</span><span class="sval">${size}</span></div>
+    <div class="srow"><span class="slabel">Sleeve Style</span><span class="sval">${sl}</span></div>`;
 }
 
 // ── SUBMIT ─────────────────────────────────────────────────────────────────
-async function submitForm() {
-  if (!validateSec(4)) return;
-
-  const btn = document.getElementById('submit-btn');
-  btn.disabled = true;
-  btn.innerHTML = '<span class="spinner"></span>Saving...';
-
-  const data = {
-    ts: new Date().toLocaleString('en-IN', {timeZone:'Asia/Kolkata'}),
-    team: document.querySelector('input[name="team"]:checked')?.value || '',
-    name: document.getElementById('inp-name').value.trim(),
-    jerseyName: document.getElementById('inp-jersey-name').value.trim(),
-    number: jerseyNum,
-    size: document.querySelector('input[name="size"]:checked')?.value || '',
-    sleeve: document.querySelector('input[name="sleeve"]:checked')?.value || ''
+async function submitForm(){
+  const btn=document.getElementById('submit-btn');
+  btn.disabled=true; btn.innerHTML='<span class="spinner"></span>Saving...';
+  const data={
+    ts:new Date().toLocaleString('en-IN',{timeZone:'Asia/Kolkata'}),
+    team:document.querySelector('input[name="team"]:checked')?.value||'',
+    name:document.getElementById('inp-name').value.trim(),
+    jerseyName:document.getElementById('inp-jersey-name').value.trim(),
+    number:jerseyNum,
+    size:document.querySelector('input[name="size"]:checked')?.value||'',
+    sleeve:document.querySelector('input[name="sleeve"]:checked')?.value||''
   };
-
-  try {
-    if (scriptUrl) {
-      await submitViaIframe(scriptUrl, data);
-    }
-    // Show success
-    document.getElementById('form-area').style.display = 'none';
-    document.querySelector('.hero').style.display = 'none';
-    const suc = document.getElementById('success-screen');
-    suc.classList.add('active');
-    document.getElementById('suc-detail').textContent =
+  try{
+    await submitViaIframe(SCRIPT_URL,data);
+    document.getElementById('form-area').style.display='none';
+    document.getElementById('form-hero').style.display='none';
+    document.getElementById('success-screen').classList.add('active');
+    document.getElementById('suc-detail').textContent=
       `${data.name} · #${String(data.number).padStart(2,'0')} · ${data.size} · ${data.sleeve}`;
-    showToast('🏏 Jersey details saved to Google Sheet!');
-  } catch(e) {
-    showToast('⚠ Could not reach Google Sheet. Check your Script URL.', true);
-    btn.disabled = false;
-    btn.innerHTML = '🏏 Submit Jersey Details';
+    showToast('🏏 Saved to Google Sheet!');
+  }catch(e){
+    showToast('⚠ Submission failed. Try again.',true);
+    btn.disabled=false; btn.innerHTML='🏏 Submit Jersey Details';
   }
 }
-
-// ── RESET ──────────────────────────────────────────────────────────────────
-function resetForm() {
+function resetForm(){
   document.getElementById('success-screen').classList.remove('active');
-  document.getElementById('form-area').style.display = '';
-  document.querySelector('.hero').style.display = '';
-  // Reset fields
-  document.querySelectorAll('input[type="radio"]').forEach(r => r.checked = false);
-  document.getElementById('inp-name').value = '';
-  document.getElementById('inp-jersey-name').value = '';
-  jerseyNum = 7;
-  updateNumDisplay();
-  document.getElementById('inp-number').value = 7;
-  // Default M and Half checked
-  document.getElementById('sz-m').checked = true;
-  document.getElementById('sl-half').checked = true;
-  // Reset errors
-  document.querySelectorAll('.sec-err').forEach(e => e.classList.remove('show'));
-  document.querySelectorAll('.field.err').forEach(e => e.classList.remove('err'));
-  // Go to sec 1
-  document.getElementById('sec' + curSec).classList.remove('active');
-  curSec = 1;
-  document.getElementById('sec1').classList.add('active');
+  document.getElementById('form-area').style.display='';
+  document.getElementById('form-hero').style.display='';
+  document.querySelectorAll('input[type="radio"]').forEach(r=>r.checked=false);
+  document.getElementById('inp-name').value='';
+  document.getElementById('inp-jersey-name').value='';
+  jerseyNum=7; updateNumDisplay();
+  document.getElementById('sz-m').checked=true;
+  document.getElementById('sl-half').checked=true;
+  document.querySelectorAll('.sec-err').forEach(e=>e.classList.remove('show'));
+  document.querySelectorAll('.field.err').forEach(e=>e.classList.remove('err'));
+  document.getElementById('sec'+curSec).classList.remove('active');
+  curSec=1; document.getElementById('sec1').classList.add('active');
   setProgress(1);
-  const btn = document.getElementById('submit-btn');
-  btn.disabled = false;
-  btn.innerHTML = '🏏 Submit Jersey Details';
-  window.scrollTo({top: 0, behavior: 'smooth'});
+  const btn=document.getElementById('submit-btn');
+  btn.disabled=false; btn.innerHTML='🏏 Submit Jersey Details';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function submitViaIframe(url,data){
+  return new Promise((resolve,reject)=>{
+    const params=new URLSearchParams({action:'save',data:JSON.stringify(data)});
+    const iframe=document.createElement('iframe');
+    iframe.style.cssText='display:none;width:0;height:0;border:0';
+    document.body.appendChild(iframe);
+    let done=false;
+    const finish=ok=>{if(done)return;done=true;
+      setTimeout(()=>{try{document.body.removeChild(iframe)}catch(e){}},1000);
+      ok?resolve():reject();};
+    iframe.onload=()=>finish(true);
+    iframe.onerror=()=>finish(false);
+    setTimeout(()=>finish(true),8000);
+    iframe.src=url+'?'+params.toString();
+  });
 }
 
-// ── IFRAME SUBMIT (bypass CORS) ────────────────────────────────────────────
-function submitViaIframe(url, data) {
-  return new Promise((resolve, reject) => {
-    const params = new URLSearchParams({ action: 'save', data: JSON.stringify(data) });
-    const fullUrl = url + '?' + params.toString();
-    const iframe = document.createElement('iframe');
-    iframe.style.cssText = 'display:none;width:0;height:0;border:0';
-    document.body.appendChild(iframe);
-    let done = false;
-    const finish = (ok) => {
-      if (done) return; done = true;
-      setTimeout(() => { try { document.body.removeChild(iframe); } catch(e) {} }, 1000);
-      if (ok) resolve(); else reject(new Error('Submit failed'));
-    };
-    iframe.onload = () => finish(true);
-    iframe.onerror = () => finish(false);
-    setTimeout(() => finish(true), 8000); // assume success after 8s (no-cors)
-    iframe.src = fullUrl;
-  });
+// ── PIN ────────────────────────────────────────────────────────────────────
+function pinKey(d){
+  if(pinEntry.length>=4)return;
+  pinEntry+=d; updatePinDots();
+  if(pinEntry.length===4) setTimeout(checkPin,140);
+}
+function pinBack(){pinEntry=pinEntry.slice(0,-1);updatePinDots();}
+function pinClear(){pinEntry='';updatePinDots();}
+function updatePinDots(){
+  for(let i=0;i<4;i++){
+    const dot=document.getElementById('pd'+i);
+    dot.className='pin-dot'+(i<pinEntry.length?' filled':'');
+  }
+}
+function checkPin(){
+  if(pinEntry===ADMIN_PIN){
+    adminUnlocked=true;
+    document.getElementById('pin-screen').style.display='none';
+    document.getElementById('admin-panel').style.display='block';
+    loadAdminData();
+  } else {
+    const card=document.getElementById('pin-card');
+    card.classList.add('do-shake');
+    for(let i=0;i<4;i++) document.getElementById('pd'+i).className='pin-dot err-d';
+    document.getElementById('pin-err').textContent='✗ Incorrect PIN. Try again.';
+    setTimeout(()=>{
+      card.classList.remove('do-shake');
+      pinEntry=''; updatePinDots();
+      document.getElementById('pin-err').textContent='';
+    },900);
+  }
+}
+function lockAdmin(){
+  adminUnlocked=false; pinEntry=''; updatePinDots();
+  document.getElementById('pin-err').textContent='';
+  document.getElementById('pin-screen').style.display='flex';
+  document.getElementById('admin-panel').style.display='none';
+  showToast('🔒 Admin panel locked.');
+}
+
+// ── ADMIN DATA ─────────────────────────────────────────────────────────────
+function loadAdminData(){
+  document.getElementById('table-container').innerHTML=
+    '<div class="loading-state"><span class="spinner" style="border-top-color:var(--teal-l)"></span>Syncing live data...</div>';
+  const cbName='cb_'+Date.now();
+  const script=document.createElement('script');
+  window[cbName]=function(resp){
+    delete window[cbName];
+    try{document.head.removeChild(script)}catch(e){}
+    if(resp&&resp.result==='ok'){
+      allData=resp.data||[];
+      renderTable(); updateStats();
+      showToast('✅ Synced — '+allData.length+' entr'+(allData.length===1?'y':'ies'));
+    } else {
+      document.getElementById('table-container').innerHTML=
+        '<div class="empty-state"><div class="ei">⚠️</div><p>Could not load data.</p></div>';
+    }
+  };
+  script.onerror=()=>{
+    delete window[cbName];
+    document.getElementById('table-container').innerHTML=
+      '<div class="empty-state"><div class="ei">⚠️</div><p>Network error. Try refreshing.</p></div>';
+  };
+  setTimeout(()=>{
+    if(window[cbName]){delete window[cbName];
+      document.getElementById('table-container').innerHTML=
+        '<div class="empty-state"><div class="ei">⏱</div><p>Request timed out. Refresh to retry.</p></div>';}
+  },12000);
+  script.src=SCRIPT_URL+'?action=get&callback='+cbName;
+  document.head.appendChild(script);
+}
+function updateStats(){
+  document.getElementById('s-total').textContent=allData.length||'0';
+  document.getElementById('s-mrc').textContent=allData.filter(r=>r.team&&r.team.includes('MRC')).length||'0';
+  document.getElementById('s-mee').textContent=allData.filter(r=>r.team&&r.team.includes('MEE')).length||'0';
+  document.getElementById('s-mm').textContent=allData.filter(r=>r.team&&r.team.includes('MM')
+    &&!r.team.includes('MEE')&&!r.team.includes('MRC')).length||'0';
+}
+function setFilter(f,btn){
+  curFilter=f;
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  renderTable();
+}
+function renderTable(){
+  const filtered=curFilter==='all'?allData:allData.filter(r=>r.team&&r.team.includes(curFilter));
+  if(!filtered.length){
+    document.getElementById('table-container').innerHTML=
+      '<div class="empty-state"><div class="ei">📋</div><p>No entries'+(curFilter!=='all'?' for '+curFilter:'')+' yet.</p></div>';
+    return;
+  }
+  const rows=filtered.map(r=>{
+    const abbr=r.team?(r.team.includes('MRC')?'MRC':r.team.includes('MEE')?'MEE':'MM'):'—';
+    const pc=abbr==='MRC'?'pill-mrc':abbr==='MEE'?'pill-mee':'pill-mm';
+    const num=r.number?String(r.number).padStart(2,'0'):'—';
+    return`<tr>
+      <td><span class="team-pill ${pc}">${abbr}</span></td>
+      <td style="font-weight:600;color:var(--chalk)">${r.name||'—'}</td>
+      <td style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:1px">${r.jerseyName||'—'}</td>
+      <td><span class="num-badge">#${num}</span></td>
+      <td><span style="font-family:'Space Mono',monospace;font-size:11px">${r.size||'—'}</span></td>
+      <td><span style="font-family:'Space Mono',monospace;font-size:11px">${r.sleeve||'—'}</span></td>
+      <td style="font-size:11px;color:var(--muted)">${r.ts||'—'}</td>
+    </tr>`;
+  }).join('');
+  document.getElementById('table-container').innerHTML=`
+    <table class="resp-table">
+      <thead><tr><th>Team</th><th>Full Name</th><th>Jersey Name</th><th>#</th><th>Size</th><th>Sleeve</th><th>Submitted</th></tr></thead>
+      <tbody>${rows}</tbody>
+    </table>`;
+}
+function exportCSV(){
+  if(!allData.length){showToast('No data to export.',true);return;}
+  const h=['Team','Full Name','Jersey Name','Number','Size','Sleeve','Submitted'];
+  const rows=allData.map(r=>[r.team,r.name,r.jerseyName,r.number,r.size,r.sleeve,r.ts]
+    .map(v=>'"'+String(v||'').replace(/"/g,'""')+'"').join(','));
+  const blob=new Blob([[h.join(','),...rows].join('\n')],{type:'text/csv'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);
+  a.download='Maieutic_Jerseys_'+new Date().toISOString().slice(0,10)+'.csv';a.click();
 }
 
 // ── TOAST ──────────────────────────────────────────────────────────────────
 let toastTimer;
-function showToast(msg, isErr = false) {
-  const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.className = 'toast' + (isErr ? ' err-toast' : '');
-  t.classList.add('show');
-  clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => t.classList.remove('show'), 3500);
-}
-
-// ── APPS SCRIPT CODE ───────────────────────────────────────────────────────
-function getAppsScript() {
-  return `// ═══════════════════════════════════════════════════════
-// Maieutic Jersey Form — Google Apps Script
-// Deploy as Web App:
-//   Execute as: Me
-//   Who has access: Anyone
-// ═══════════════════════════════════════════════════════
-
-function doGet(e) {
-  try {
-    var action = e.parameter.action;
-    var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
-
-    // Ensure header row exists
-    if (sheet.getLastRow() === 0) {
-      sheet.appendRow(['Timestamp', 'Team', 'Full Name', 'Jersey Name', 'Jersey Number', 'Size', 'Sleeve Style']);
-    }
-
-    if (action === 'save') {
-      var raw = e.parameter.data;
-      var d = JSON.parse(raw);
-      sheet.appendRow([
-        d.ts || new Date().toLocaleString(),
-        d.team || '',
-        d.name || '',
-        d.jerseyName || '',
-        d.number || '',
-        d.size || '',
-        d.sleeve || ''
-      ]);
-      return ContentService
-        .createTextOutput(JSON.stringify({ result: 'ok' }))
-        .setMimeType(ContentService.MimeType.JSON);
-    }
-
-    if (action === 'get') {
-      var rows = sheet.getDataRange().getValues();
-      var data = rows.slice(1).map(function(r) {
-        return { ts: r[0], team: r[1], name: r[2], jerseyName: r[3], number: r[4], size: r[5], sleeve: r[6] };
-      });
-      var result = JSON.stringify({ result: 'ok', data: data });
-      var cb = e.parameter.callback;
-      if (cb) {
-        return ContentService.createTextOutput(cb + '(' + result + ')').setMimeType(ContentService.MimeType.JAVASCRIPT);
-      }
-      return ContentService.createTextOutput(result).setMimeType(ContentService.MimeType.JSON);
-    }
-
-    return ContentService.createTextOutput(JSON.stringify({ result: 'error', msg: 'Unknown action' }))
-      .setMimeType(ContentService.MimeType.JSON);
-
-  } catch(err) {
-    return ContentService.createTextOutput(JSON.stringify({ result: 'error', msg: err.toString() }))
-      .setMimeType(ContentService.MimeType.JSON);
-  }
-}
-
-function doPost(e) {
-  return doGet(e);
-}`;
+function showToast(msg,isErr=false){
+  const t=document.getElementById('toast');
+  t.textContent=msg; t.className='toast'+(isErr?' err-toast':'');
+  t.classList.add('show'); clearTimeout(toastTimer);
+  toastTimer=setTimeout(()=>t.classList.remove('show'),3500);
 }
 </script>
 </body>
